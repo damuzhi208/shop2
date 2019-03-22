@@ -204,56 +204,133 @@ public class BaseDao<E, PK extends Serializable> extends SqlCommonDao implements
 		return Integer.valueOf(0);
 	}
 
-	public <T> List<T> getBeanListBysql(String sql, Class<T> c, Object... params) {
-		return getBeanListBysql(sql, c, null, null, params);
+	public List<E> findByHql(String hql, Object[] values){
+		return (List<E>) this.getHibernateTemplate().find(hql, values);
 	}
 	
-	public <T> List<T> findByHql(String hql){
-		return (List<T>) this.getHibernateTemplate().find(hql);
+	/**
+	 * hql返回list对象
+	 * @param hql
+	 * @return
+	 */
+	public List<E> findByHql(final String hql){
+		return findByHql(hql, null);
 	}
 	
-	public <T> List<T> findByHql(String hql, Object[] values){
-		return (List<T>) this.getHibernateTemplate().find(hql, values);
-	}
-	
-	public <T> List<T> findListToAliasToBeanBySql(final String sql){
-		return (List<T>) getHibernateTemplate().execute(new HibernateCallback<T>() {
-			public T doInHibernate(Session session) throws HibernateException {
-				Query query = session.createSQLQuery(sql);
-				return (T) query.list();
+	/**
+	 * hql查询分页
+	 * @param hql
+	 * @param params
+	 * @param page
+	 * @param size
+	 * @return
+	 */
+	public List<E> findByHql(final String hql, final Object[] params, final Integer page, final Integer size) {
+		return (List<E>) this.getHibernateTemplate().execute(new HibernateCallback() {
+			public List<E> doInHibernate(Session session) {
+				Query q = session.createQuery(hql);
+				if (null != params) {
+					int size = params.length;
+					for (int i = 0; i < size; i++) {
+						q.setParameter(i, params[i]);
+					}
+				}
+				if(page != null && size != null){
+					q.setFirstResult((page - 1)*size);
+					q.setMaxResults(size);
+				}
+				return q.list();
 			}
 		});
 	}
 	
-	public <T> List<T> findListToAliasToBeanBySql(final String sql,Object[] params){
-		Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql);
-		for (int i = 0; i < params.length; i++) {
-			query.setParameter(i, params[i]);
-		}
-		query.setResultTransformer(Transformers.aliasToBean(type));
-		return query.list();
+	/**
+	 * 返回唯一对象
+	 * @param sql
+	 * @return
+	 */
+	public E findUniqueBeanBySql(final String sql){
+		return findUniqueBeanBySql(sql, null);
 	}
 	
-	public <T> List<T> findListToAliasToBeanBySql(final String sql, final Integer page,final Integer size){
-		return (List<T>) getHibernateTemplate().execute(new HibernateCallback<T>() {
-			public T doInHibernate(Session session) throws HibernateException {
+	/**
+	 * 返回唯一对象
+	 * @param sql
+	 * @param params
+	 * @return
+	 */
+	public E findUniqueBeanBySql(final String sql,final Object[] params){
+		return (E) getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
+            public Object doInHibernate(Session session) throws HibernateException {
 				Query query = session.createSQLQuery(sql);
-				query.setMaxResults(size);
-				query.setFirstResult(page);
-				return (T) query.list();
-			}
-		});
+				if(params != null){
+					for(int i = 0; i < params.length; i++){
+						query.setParameter(i, params[i]);
+					}
+				}
+				query.setResultTransformer(Transformers.aliasToBean(type));
+                return (E)query.uniqueResult();  
+            }  
+       });
 	}
 	
-	public <T> List<T> findListToAliasToBeanBySql(final String sql, Object[] params, final Integer page,final Integer size){
-		Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql);
-		for (int i = 0; i < params.length; i++) {
-			query.setParameter(i, params[i]);
-		}
-		query.setMaxResults(size);
-		query.setFirstResult(page);
-		query.setResultTransformer(Transformers.aliasToBean(type));
-		return query.list();
+	/**
+	 * sql查询返回list集合
+	 * @param sql
+	 * @return
+	 */
+	public List<E> findListToAliasToBeanBySql(final String sql){
+		return findListToAliasToBeanBySql(sql, null);
+	}
+	
+	/**
+	 * sql查询返回list集合
+	 * @param sql
+	 * @param params
+	 * @return
+	 */
+	public List<E> findListToAliasToBeanBySql(final String sql,final Object[] params){
+		return findListToAliasToBeanBySql(sql, params, null, null);
+	}
+	
+	/**
+	 * sql查询返回list集合
+	 * @param sql
+	 * @param page
+	 * @param size
+	 * @return
+	 */
+	public List<E> findListToAliasToBeanBySql(final String sql, final Integer page,final Integer size){
+		return findListToAliasToBeanBySql(sql, null, page, size);
+	}
+	
+	/**
+	 * sql查询返回list集合
+	 * @param sql
+	 * @param params
+	 * @param page
+	 * @param size
+	 * @return
+	 */
+	public List<E> findListToAliasToBeanBySql(final String sql,final Object[] params, final Integer page,final Integer size){
+		return (List<E>) getHibernateTemplate().execute(new HibernateCallback() {
+			@Override  
+            public Object doInHibernate(Session session) throws HibernateException {
+				Query query = session.createSQLQuery(sql);
+				if(params != null){
+					for (int i = 0; i < params.length; i++) {
+						query.setParameter(i, params[i]);
+					}
+				}
+				if(page != null && size != null){
+					query.setFirstResult((page - 1)*size);
+					query.setMaxResults(size);
+				}
+				query.setResultTransformer(Transformers.aliasToBean(type));
+                return (List<E>)query.list();  
+            }  
+       });
 	}
 	
 }
