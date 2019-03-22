@@ -4,8 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Entity(name="t_sys_user")
+@Entity
+@Table(name="t_sys_user")
 public class TSysUser {
 	
 	@Id
