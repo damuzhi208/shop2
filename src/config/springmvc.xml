@@ -11,8 +11,19 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd"
 	default-autowire="byName">
 
+	<mvc:annotation-driven />
+	<!-- 自动扫描bean -->
 	<context:component-scan base-package="com.company.hxs"></context:component-scan>
-
+	
+	<!-- 访问url前后缀配置 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/jsp/" p:suffix=".jsp" />
+	
+	<!-- 配置静态资源 顺序有关放前 -->
+	<mvc:default-servlet-handler/>
+	<mvc:resources mapping="/js/**" location="/js/" />
+	<mvc:resources mapping="/css/**" location="/css/" />
+	<mvc:resources mapping="/image/**" location="/image/" />
+	
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
@@ -37,24 +48,5 @@
 			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
-
-	<mvc:default-servlet-handler />
-
-	<!-- 默认的异常处理 -->
-	<bean id="exceptionResolver"
-		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-		<property name="defaultErrorView">
-			<value>/error/error</value>
-		</property>
-		<property name="defaultStatusCode">
-			<value>500</value>
-		</property>
-		<property name="warnLogCategory">
-			<value>org.springframework.web.servlet.handler.SimpleMappingExceptionResolver
-			</value>
-		</property>
-	</bean>
-
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/jsp/" p:suffix=".jsp" />
 
 </beans>
