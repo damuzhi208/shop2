@@ -32,6 +32,7 @@ console.info("==================")
   }); 
 </script>
 <style type="text/css">
+*{margin:0;padding:0;}
 a{
   text-decoration:none;
 }
@@ -39,20 +40,26 @@ body{
   margin:0px;
 }
 .header{
-  width:100%;
-  height:30px;
-  background-color:#E0EFFF;
-  padding-bottom: 10px;
-  position: relative;
+  height:50px;  
+  position:absolute;
+  left:30px;
+  top:100px;
 }
 .header .logo{
-  margin-left: 50px;
-  font-size: 24px;
-  font-family: 微软雅黑;position: absolute;margin:auto; top: 0;left: 0;right: 0;bottom: 0;
+	float:left;	
+}
+.header logo img{
+	 width:50px;
+	 height:50px;
+}
+.header h1{	
+  	font-size: 24px;
+  	line-height:50px;
+  	color:#fff;
 }
 #picture{
   width:100%;
-  height:584px;
+  height:90%;
 }
 .panel-title {
  text-align: center;
@@ -60,14 +67,11 @@ body{
 }
 #bootom{
   width:100%;
-  height:100px;
+  height:10%;
   background: #eaf2ff;
-}
-#bootom_content{
-  margin-left:100px;
-  width:80%;
   text-align: center;
   font-size:0.8em; 
+  overflow:hidden;
 }
 p{
   line-height:20px; 
@@ -75,13 +79,12 @@ p{
 </style>
 </head>
 
-<body>
-	<div class="header" >
-	    <div class="logo" onclick="javascript:void(0)">
-			<strong>信息系统</strong>
-	    </div>
-	</div>
+<body>	
   <div id="picture" style="background:url(images/timg.jpg) no-repeat; background-size: cover;">
+		<div class="header">
+			<div class="logo"></div>
+		    <h1>信息系统</h1>				
+		</div>
   <div data-options=" region:'east',split:true,style:{position:'absolute',right:280,top:180}" class="easyui-panel " title="用户登录" style="width:300px;text-align: center;">
       <div style="padding:10px 60px 20px 60px">
         <form id="ff" class="easyui-form" method="post" data-options="novalidate:true">
@@ -100,12 +103,10 @@ p{
       </div>
     </div>
   </div>
-  <div id="bootom">
-    <div id="bootom_content">
+  <div id="bootom">   
       <p><strong>关于我们      法律声明      服务条款     联系我们</strong></p>
       <p>地址：江西省南昌市经济开发区天祥大道    邮箱：330000  Copyright © 2017 - 2018    hacker_pangdaxing@qq.com 版权所有</p>
-      <p>建议使用IE8以上版本浏览器    E-mail：hacker_pandaxing@qq.com</p>
-    </div>
+      <p>建议使用IE8以上版本浏览器    E-mail：hacker_pandaxing@qq.com</p>    
   </div>
 </body>
 <script>
