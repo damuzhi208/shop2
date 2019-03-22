@@ -1,18 +1,28 @@
 package com.company.hxs.login.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity(name="t_sys_user")
 public class TSysUser {
 	
-	private String id;
+	@Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+	private Integer id;
 	
 	private String userName;
 	
 	private String passWord;
 
-	public String getId() {
+	private Integer state;//状态，1有效，0无效
+	
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -31,6 +41,13 @@ public class TSysUser {
 	public void setPassWord(String passWord) {
 		this.passWord = passWord;
 	}
-	
+
+	public Integer getState() {
+		return state;
+	}
+
+	public void setState(Integer state) {
+		this.state = state;
+	}
 	
 }
