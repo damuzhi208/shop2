@@ -3,10 +3,9 @@ package com.company.hxs.common.service;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.sf.json.JSONArray;
@@ -16,11 +15,10 @@ import com.company.hxs.base.dao.SqlCommonDao;
 import com.company.hxs.common.IBaseService;
 import com.company.hxs.common.JSONConfigFactory;
 
-@Service
 @Transactional
 public class BaseService implements IBaseService{
 
-	@Autowired protected SqlCommonDao sqlCommonDao;
+	@Resource protected SqlCommonDao sqlCommonDao;
 	
 	public static String List2Json(List<?> result, Integer total) {
 		JSONArray array = JSONArray.fromObject(result,JSONConfigFactory.getYMDConfig());
@@ -121,7 +119,7 @@ public class BaseService implements IBaseService{
 	@Override
 	public boolean deleteObject(Object obj) {
 		try {
-			//this.sqlCommonDao.removeEntity(obj);
+			this.sqlCommonDao.removeEntity(obj);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -132,7 +130,7 @@ public class BaseService implements IBaseService{
 	@Override
 	public boolean saveOrUpdate(Object obj) {
 		try {
-			//this.sqlCommonDao.saveOrUpdate(obj);
+			this.sqlCommonDao.saveOrUpdate(obj);
 			return true;
 	    } catch (Exception e) {
 	      e.printStackTrace();
@@ -152,9 +150,9 @@ public class BaseService implements IBaseService{
 	    Boolean result = Boolean.valueOf(deleteObject(obj));
 	    json.put("success", result);
 	    if (result.booleanValue()) {
-	    	json.put("msg", "åˆ é™¤æ•°æ®æˆåŠŸ!");
+	    	json.put("msg", "É¾³ı³É¹¦!");
 	    } else if (!result.booleanValue()) {
-	    	json.put("msg", "åˆ é™¤æ•°æ®å¤±è´¥!");
+	    	json.put("msg", "É¾³ıÊ§°Ü!");
 	    }
 	    return json.toString();
 	}
@@ -165,10 +163,10 @@ public class BaseService implements IBaseService{
 		boolean result = saveOrUpdate(obj);
 		if (result) {
 			json.put("success", Boolean.valueOf(true));
-			json.put("msg", "ä¿å­˜æ•°æ®æˆåŠŸ!");
+			json.put("msg", "²Ù×÷³É¹¦!");
 		} else {
 			json.put("success", Boolean.valueOf(false));
-			json.put("msg", "ä¿å­˜æ•°æ®å¤±è´¥!");
+			json.put("msg", "²Ù×÷Ê§°Ü!");
 		}
 		return json.toString();
 	}
