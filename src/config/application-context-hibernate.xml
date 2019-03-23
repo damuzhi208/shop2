@@ -80,7 +80,7 @@
 
 	<!-- 那些类的哪些方法参与事务 -->
 	<aop:config>
-		<aop:advisor pointcut="execution(* com.company.hxs.service.*Service.*(..))" advice-ref="txAdvice" />
+		<aop:advisor pointcut="execution(* com.company.hxs.*.service.*Service.*(..))" advice-ref="txAdvice" />
 	</aop:config>
 	
 	<!-- 声明可以使用注解配置事务管理 -->
