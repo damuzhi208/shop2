@@ -1,33 +1,50 @@
 package com.company.hxs.sys.menu.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+/**
+ * 菜单实体
+ * @author luqi
+ *
+ */
+@Entity
+@Table(name="t_sys_menu")
 public class TSysMenu {
 
-	private String menuid;//主键
+	@Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+	private Integer menuId;//
 
-	private String menuname;//菜单名称
+	private String menuName;//菜单名称
 
-	private String icon;//样式
+	private String icon;//图标
 
 	private String url;//菜单路径
 
-	private Integer order;//菜单顺序
+	private Integer order;//排序号
 
-	private Integer status;//菜单状态
+	private Integer status;//状态
 
-	public String getMenuid() {
-		return menuid;
+	private Integer parentId;//上级节点
+	
+	public Integer getMenuId() {
+		return menuId;
 	}
 
-	public void setMenuid(String menuid) {
-		this.menuid = menuid;
+	public void setMenuId(Integer menuId) {
+		this.menuId = menuId;
 	}
 
-	public String getMenuname() {
-		return menuname;
+	public String getMenuName() {
+		return menuName;
 	}
 
-	public void setMenuname(String menuname) {
-		this.menuname = menuname;
+	public void setMenuName(String menuName) {
+		this.menuName = menuName;
 	}
 
 	public String getIcon() {
@@ -60,6 +77,14 @@ public class TSysMenu {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public Integer getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Integer parentId) {
+		this.parentId = parentId;
 	}
 
 }

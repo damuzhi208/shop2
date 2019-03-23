@@ -6,6 +6,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * 用户表实体
+ * @author luqi
+ *
+ */
 @Entity
 @Table(name="t_sys_user")
 public class TSysUser {
@@ -13,6 +18,8 @@ public class TSysUser {
 	@Id
     @GeneratedValue(strategy= GenerationType.AUTO)
 	private Integer id;
+	
+	private String account;
 	
 	private String userName;
 	
@@ -26,6 +33,14 @@ public class TSysUser {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
 	}
 
 	public String getUserName() {

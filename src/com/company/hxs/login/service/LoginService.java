@@ -16,12 +16,10 @@ public class LoginService extends BaseService{
 	@Resource private TSysUserDao tSysUserDao;
 	
 	public TSysUser getTSysUser(TSysUser tSysUser) {
-		return tSysUserDao.findUniqueBeanBySql("select * from t_sys_user where userName = 'admin' and passWord = '123'");
+		return tSysUserDao.findUniqueBeanBySql("select * from t_sys_user where account = ? and passWord = ?",new Object[]{tSysUser.getAccount(), tSysUser.getPassWord()});
 	}
 
 	public List<TSysUser> getTSysUserList(){
-		List<TSysUser> list = tSysUserDao.findByHql("from TSysUser", null, 1, 10);
-		System.out.println("size========================================"+list.size());
 		return tSysUserDao.findByHql("from TSysUser");
 	}
 	
