@@ -11,12 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONObject;
 import net.sf.jxls.transformer.XLSTransformer;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+
+import com.company.hxs.common.sys.SysConstant;
 
 public class BaseController {
 
@@ -31,7 +34,7 @@ public class BaseController {
 	}
 	
 	/**
-	 * 获取当前页
+	 * 鑾峰彇褰撳墠椤�
 	 * @return
 	 */
 	public static Integer getCurPage() {
@@ -43,7 +46,7 @@ public class BaseController {
 	}
 
 	/**
-	 * 获取当前行
+	 * 鑾峰彇褰撳墠琛�
 	 * @return
 	 */
 	public static Integer getCurRows() {
@@ -55,7 +58,7 @@ public class BaseController {
 	}
 	
 	/**
-	 * 导出excel
+	 * 瀵煎嚭excel
 	 * @param beans
 	 * @param templateFile
 	 * @param downName
@@ -74,7 +77,7 @@ public class BaseController {
 	}
 	
 	/**
-	 * 下载文件
+	 * 涓嬭浇鏂囦欢
 	 * @param file
 	 * @param fileName
 	 * @param res
@@ -84,7 +87,7 @@ public class BaseController {
 	protected String downFile(File file, String fileName, HttpServletResponse res) throws IOException {
 		OutputStream os = null;
 		if ((file == null) || (!file.exists())) {
-			return "文件不存在!";
+			return "鏂囦欢涓嶅瓨鍦�";
 		}
 		try {
 			os = res.getOutputStream();
@@ -96,7 +99,7 @@ public class BaseController {
 			os.flush();
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "下载文件不成功!";
+			return "涓嬭浇鏂囦欢涓嶆垚鍔�";
 		} finally {
 			if (os != null) {
 				os.close();
@@ -104,5 +107,18 @@ public class BaseController {
 		}
 		return null;
 	}
-		  
+	
+	/**
+	 * 创建返回结果
+	 * @param flag
+	 * @param msg
+	 * @return
+	 */
+	public JSONObject createResult(boolean flag, String msg){
+		JSONObject js = new JSONObject();
+		js.put(SysConstant.AJAX_SUCCESS, flag);
+		js.put(SysConstant.AJAX_MSG, msg);
+		return js;
+	}
+	
 }
