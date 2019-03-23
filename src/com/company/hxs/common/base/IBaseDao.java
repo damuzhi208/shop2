@@ -1,6 +1,7 @@
 package com.company.hxs.common.base;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.springframework.orm.hibernate4.HibernateTemplate;
 
@@ -34,4 +35,12 @@ public abstract interface IBaseDao<E, PK extends Serializable> extends ISqlCommo
 	@Deprecated
 	public abstract Integer getCount(String paramString, Object... paramVarArgs);
 
+	public List<E> findListToAliasToBeanBySql(final String sql);
+	
+	public List<E> findListToAliasToBeanBySql(final String sql,final Object[] params);
+	
+	public List<E> findListToAliasToBeanBySql(final String sql, final Integer page,final Integer size);
+	
+	public List<E> findListToAliasToBeanBySql(final String sql,final Object[] params, final Integer page,final Integer size);
+	
 }
