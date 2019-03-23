@@ -17,7 +17,7 @@ $(function(){
 
 	$('#tabs').tabs('add',{
 		title:'疯狂秀才',
-		content:createFrame('http://hxling.cnblogs.com')
+		content:createFrame('baseqj/list')
 	}).tabs({
         onSelect: function (title) {
             var currTab = $('#tabs').tabs('getTab', title);
@@ -35,12 +35,11 @@ $(function(){
 //初始化左侧
 function InitLeftMenu() {
 	$("#nav").accordion({animate:false});
-
     $.each(_menus.menus, function(i, n) {
 		var menulist ='';
 		menulist +='<ul>';
         $.each(n.menus, function(j, o) {
-			menulist += '<li><div><a ref="'+o.menuid+'" href="#" rel="' + o.url + '" ><span class="icon '+o.icon+'" >&nbsp;</span><span class="nav">' + o.menuname + '</span></a></div></li> ';
+			menulist += '<li><div><a ref="'+o.menuid+'" href="javascript:void(0)" rel="' + o.url + '" ><span class="icon '+o.icon+'" >&nbsp;</span><span class="nav">' + o.menuname + '</span></a></div></li> ';
         });
 		menulist += '</ul>';
 		$('#nav').accordion('add', {
