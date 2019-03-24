@@ -17,7 +17,7 @@ public class TSysMenuService extends BaseService{
 	@Resource private TSysMenuDao tSysMenuDao; 
 	
 	public List<TSysMenuVO> getMenuList(TSysUser user) {
-		String pSql = "select t.menuId menuid,t.menuName menuname,t.icon,t.url from t_sys_menu t where t.parentId is null";
+		String pSql = "select t.menuId menuid,t.menuName menuname,t.icon,t.url from t_sys_menu t where t.parentId is null order by t.order";
 		List<TSysMenuVO> parentList = sqlCommonDao.findListBySqlAsAliasToBean2(pSql, TSysMenuVO.class);
 		for(TSysMenuVO vo : parentList){
 			getChildrenMenu(vo);
@@ -26,7 +26,7 @@ public class TSysMenuService extends BaseService{
 	}
 
 	private void getChildrenMenu(TSysMenuVO vo) {
-		String cSql = "select t.menuId menuid,t.menuName menuname,t.icon,t.url from t_sys_menu t where t.parentId = ?";
+		String cSql = "select t.menuId menuid,t.menuName menuname,t.icon,t.url from t_sys_menu t where t.parentId = ? order by t.order";
 		List<TSysMenuVO> childrenList = sqlCommonDao.findListBySqlAsAliasToBean2(cSql, TSysMenuVO.class, new Object[]{vo.getMenuid()});
 		vo.setMenus(childrenList);
 		for(TSysMenuVO co : childrenList){

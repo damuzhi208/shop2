@@ -1,7 +1,5 @@
 package com.company.hxs.basedata.controller;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.company.hxs.basedata.entity.TBaseQiaojia;
 import com.company.hxs.basedata.service.TBaseQiaoJiaService;
+import com.company.hxs.common.Page;
 import com.company.hxs.common.controller.BaseController;
 import com.company.hxs.common.service.BaseService;
 
@@ -39,8 +38,8 @@ public class TBaseQiaojiaController extends BaseController{
 	@RequestMapping("listData")
 	@ResponseBody
 	public String getQjListData(HttpServletRequest request, TBaseQiaojia qiaojia, Integer page, Integer rows){
-		List<TBaseQiaojia> list = tBaseQiaoJiaService.getQjListData(qiaojia, page, rows);
-		return BaseService.List2Json(list, list.size()).toString();
+		Page<TBaseQiaojia> pages = tBaseQiaoJiaService.getPageInfoList(qiaojia, page , rows);
+		return BaseService.List2Json(pages.getRows(), pages.getTotal()).toString();
 	}
 	
 	/**

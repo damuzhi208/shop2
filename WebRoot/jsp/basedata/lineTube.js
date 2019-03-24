@@ -6,7 +6,6 @@ function doSearch(){
 	$("#toolbar").find("input[name],select[name]").each(function(i){
 		params[this.name] = this.value;
 	});
-	console.log("params"+JSON.stringify(params));
 	$("#datagrid").datagrid('load',params);
 }
 
@@ -17,21 +16,8 @@ function doSearch(){
  * @param index
  */
 function mTypeFormatter(value,row,index){
-	if(row.mType==1) return '喷塑桥架';
-	if(row.mType==2) return '镀锌桥架';
-	return '其他';
-}
-
-/**
- * 桥架/盖板
- * @param value
- * @param row
- * @param index
- * @returns {String}
- */
-function typeFormatter(value,row,index){
-	if(row.type==1) return '桥架';
-	if(row.type==2) return '盖板';
+	if(row.mType==1) return '金属软管';
+	if(row.mType==2) return '线管';
 	return '其他';
 }
 
@@ -42,13 +28,13 @@ function typeFormatter(value,row,index){
  * @param index
  */
 function opFormatter(value,row,index){
-	return '<a href="javascript:void(0)" onclick="modBaseQj(\''+row.id+'\', \''+row.guige+'\', \''+row.type+'\')">修改</a>';
+	return '<a href="javascript:void(0)" onclick="modLine(\''+row.id+'\', \''+row.guige+'\', \''+row.type+'\')">修改</a>';
 }
 
-function modBaseQj(pId, guige, type){
-	var title = (type == 1) ? "桥架" : "盖板"; 
+function modLine(pId, guige, type){
+	var title = (type == 1) ? "软管" : "线管"; 
 	modelDialog = sy.iframeDialog({
-		"href" : "baseqj/modBaseQj?id="+pId,
+		"href" : "baseqj/modLine?id="+pId,
 		"height" : $('body', document).height() * 0.68,
 		"width" : $('body', document).width() * 0.4,
 		"title" : guige +'【' + title + '】修改',
@@ -93,10 +79,10 @@ function editBtnClick(){
 function delBtnClick(){
 	var row = $("#datagrid").datagrid('getSelected');
 	if(!row){
-		showInfo({msg:'��ѡ��һ����¼��'});
+		showInfo({msg:'？？？？？？'});
 		return;
 	}
-	showConfirm('ȷ��','ȷ��ɾ��ü�¼��',function(){
+	showConfirm('提示','确定删除吗？',function(){
 		var url = basePath + 'singleTable/jsonDelete?entityClass=HrPositive&id='+row.id;
 		$.post(url,function(js){
 			showInfo({msg:js.msg});

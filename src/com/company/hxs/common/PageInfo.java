@@ -1,12 +1,17 @@
 package com.company.hxs.common;
 
-public class PageInfo {
+import java.util.List;
+
+import com.google.common.collect.Lists;
+
+public class PageInfo<T> {
 	
 	public static final int DEFUALT_PAGE_SIZE = 10;
 	private Integer maxResult = Integer.valueOf(10);
 	private Integer totalResult;
 	private Integer currentPage;
 	private Integer totalPage;
+	private List<T> data = Lists.newArrayList();
 
 	public PageInfo() {
 		this.currentPage = Integer.valueOf(1);
@@ -45,4 +50,13 @@ public class PageInfo {
 	public Integer getFirstResult() {
 		return Integer.valueOf((this.currentPage.intValue() - 1) * this.maxResult.intValue());
 	}
+	
+	public List<T> getData() {
+		return data;
+	}
+	
+	public void setData(List<T> data) {
+		this.data = data;
+	}
+	
 }

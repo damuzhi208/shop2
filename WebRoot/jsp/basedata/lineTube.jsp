@@ -24,15 +24,10 @@
   <div class="easyui-layout" fit="true" style="border:none;">
 		<div id="toolbar" style="height: 30px;">
 			规格：<input type="text" name="guige" />
-			桥架类型：<select name="mType">
+			软管/线管：<select name="mType">
 						<option value="">==全部==</option>
-						<option value="1">喷塑桥架</option>
-						<option value="2">镀锌桥架</option>
-					  </select>
-			桥架/盖板：<select name="type">
-						<option value="">==全部==</option>
-						<option value="1">桥架</option>
-						<option value="2">盖板</option>
+						<option value="1">软管</option>
+						<option value="2">线管</option>
 					  </select>
 			<span class="btn pull-right" onclick="addBtnClick();">新增</span>
 			<span class="btn pull-right" onclick="doSearch();">搜索</span>
@@ -47,20 +42,17 @@
 						nowrap:false,
 						singleSelect:true,
 						pageList:[10,15,20,25,30,35,50,100],
-						url:'<%=basePath %>baseqj/listData'"
+						url:'<%=basePath %>lineTube/listData'"
 				>
 				<thead data-options="frozen:true">
 		    		<tr>
-		    			<th data-options="field:'0',align:'center',width:100,formatter:mTypeFormatter">喷塑/镀锌</th>
-		    			<th data-options="field:'1',align:'center',width:100,formatter:typeFormatter">桥架/盖板</th>
+		    			<th data-options="field:'1',align:'center',width:160,formatter:mTypeFormatter">金属软管/线管</th>
+		    			<th data-options="field:'guige',align:'center',width:160">规格</th>
 		    		</tr>
 		    	</thead>
 		    	<thead>
 		    		<tr>
-		    			<th data-options="field:'guige',align:'center',width:300">规格</th>
-		    			<th data-options="field:'houdu',align:'center',width:100">厚度</th>
-		    			<th data-options="field:'xishu',align:'center',width:100">系数</th>
-		    			<th data-options="field:'dwj',align:'center',width:100">单位价</th>
+		    			<th data-options="field:'danwei',align:'center',width:100">单位</th>
 		    			<th data-options="field:'danjia',align:'center',width:100">单价</th>
 		    			<th data-options="field:'2',align:'center',width:100,formatter:opFormatter">操作</th>
 		    		</tr>
@@ -68,6 +60,6 @@
 			</table>
 		</div>
 	</div>
-	<script type="text/javascript" src="<%=basePath %>jsp/basedata/list.js"></script>
+	<script type="text/javascript" src="<%=basePath %>jsp/basedata/lineTube.js"></script>
   </body>
 </html>
