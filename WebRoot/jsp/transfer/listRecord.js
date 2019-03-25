@@ -10,6 +10,20 @@ function doSearch(){
 }
 
 /**
+ * 调动类型
+ * @param value
+ * @param row
+ * @param index
+ */
+function transTypeFormatter(value, row, index){
+	if(value == 1){
+		return "调入";
+	}else if(value == 2){
+		return "调出";
+	}
+}
+
+/**
  * 规格formatter
  * @param value
  * @param row
@@ -20,9 +34,28 @@ function guigeFormatter(value,row,index){
 	return str;
 }
 
+/**
+ * YMD  formatter
+ * @param value
+ * @param row
+ * @param index
+ * @returns
+ */
 function YMDDateFormatter(value,row,index){
 	if(value){
 		return value.substring(0, 11);
+	}
+}
+
+/**
+ * 利润formatter
+ * @param value
+ * @param row
+ * @param index
+ */
+function profitFormatter(value,row,index){
+	if(row.nums && row.cost && row.salePrice){
+		return parseFloat((Number(row.salePrice) - Number(row.cost)) * Number(row.nums)).toFixed(2);
 	}
 }
 /**
@@ -31,16 +64,26 @@ function YMDDateFormatter(value,row,index){
  * @param row
  * @param index
  */
-function opFormatter(value,row,index){
+function opFormatter(value, row, index){
 	return '<a href="javascript:void(0)" onclick="modLine(\''+row.id+'\', \''+row.name+'\')">修改</a>';
 }
 
+/**
+ * 新增、修改调动记录
+ * @param pId
+ * @param name
+ * @returns {Boolean}
+ */
 function modLine(pId, name){
+	var url = "transfer/modTransfer";
+	if(pId){
+		url += "?id=" + pId;
+	}
 	modelDialog = sy.iframeDialog({
-		"href" : "customer/modCustomer?id="+pId,
-		"height" : $('body', document).height() * 0.5,
+		"href" : url,
+		"height" : $('body', document).height() * 0.65,
 		"width" : $('body', document).width() * 0.4,
-		"title" : name,
+		"title" : "【商品调动】修改",
 		"buttons": [
               {
             	  text : '确定',handler : function() {
@@ -68,7 +111,7 @@ function modLine(pId, name){
 }
 
 function addBtnClick(){
-	top.openTab('',basePath+'hr/modPositive');
+	modLine(null, null);
 }
 
 function editBtnClick(){
@@ -77,7 +120,7 @@ function editBtnClick(){
 		showInfo({msg:''});
 		return;
 	}
-	top.openTab(row.infoName,basePath+'hr/modPositive?id='+row.id);
+	top.openTab(row.infoName,basePath+'transfer/modPositive?id='+row.id);
 }
 function delBtnClick(){
 	var row = $("#datagrid").datagrid('getSelected');

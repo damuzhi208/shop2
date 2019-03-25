@@ -15,10 +15,9 @@ function doSearch(){
  * @param row
  * @param index
  */
-function mTypeFormatter(value,row,index){
-	if(row.mType==1) return '1';
-	if(row.mType==2) return '2';
-	return '其他';
+function statusFormatter(value,row,index){
+	if(row.status == 1) return '有效';
+	return '<span style="color:red;">无效</span>';
 }
 
 /**
@@ -28,11 +27,11 @@ function mTypeFormatter(value,row,index){
  * @param index
  */
 function opFormatter(value,row,index){
-	return '<a href="javascript:void(0)" onclick="modCustomer(\''+row.id+'\', \''+row.name+'\')">修改</a>';
+	return '<a href="javascript:void(0)" onclick="modUnit(\''+row.id+'\', \''+row.name+'\')">修改</a>';
 }
 
-function modCustomer(pId, name){
-	var url = "customer/modCustomer";
+function modUnit(pId, name){
+	var url = "baseUnit/modUnit";
 	if(pId){
 		url += "?id="+pId;
 	}
@@ -40,7 +39,7 @@ function modCustomer(pId, name){
 		"href" : url,
 		"height" : $('body', document).height() * 0.5,
 		"width" : $('body', document).width() * 0.4,
-		"title" : '客户信息【' + name + '】 编辑',
+		"title" : '单位信息',
 		"buttons": [
               {
             	  text : '确定',handler : function() {
@@ -68,29 +67,6 @@ function modCustomer(pId, name){
 }
 
 function addBtnClick(){
-	modCustomer(null, "");
+	modUnit(null, "");
 }
 
-function editBtnClick(){
-	var row = $("#datagrid").datagrid('getSelected');
-	if(!row){
-		showInfo({msg:''});
-		return;
-	}
-	top.openTab(row.infoName,basePath+'hr/modPositive?id='+row.id);
-}
-function delBtnClick(){
-	var row = $("#datagrid").datagrid('getSelected');
-	if(!row){
-		showInfo({msg:'请选择'});
-		return;
-	}
-	showConfirm('提示','确定？',function(){
-		var url = basePath + 'singleTable/jsonDelete?entityClass=HrPositive&id='+row.id;
-		$.post(url,function(js){
-			showInfo({msg:js.msg});
-			if(js.success)
-				$("#datagrid").datagrid('deleteRow',$("#datagrid").datagrid('getRowIndex',row));
-		},'json');
-	});
-}

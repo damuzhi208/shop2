@@ -1,0 +1,7 @@
+
+--×ÔÔö³¤
+alter table t_base_customer modify id integer auto_increment ; 
+ALTER TABLE t_base_customer AUTO_INCREMENT = 1;
+
+
+

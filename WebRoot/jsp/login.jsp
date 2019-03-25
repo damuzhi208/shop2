@@ -79,7 +79,7 @@ p{
 	<div id="picture" style="background:url(images/timg.jpg) no-repeat; background-size: cover;">
 		<div class="header">
 			<div class="logo"></div>
-		    <h1>武汉恒鑫晟有限公司<br>库存管理系统</h1>				
+		    <h1>信息系统</h1>				
 		</div>
 		<div data-options=" region:'east',split:true,style:{position:'absolute',right:280,top:180}" class="easyui-panel " title="用户登录" style="width:300px;text-align: center;">
 			<div style="padding:10px 60px 20px 60px">

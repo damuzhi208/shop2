@@ -32,6 +32,13 @@ toLoginPage(window);
 </script>
 <script type="text/javascript">
 	var _menus = { "menus" : JSON.parse('${menus}') };
+	/*var _menus = null;
+	$.ajaxSettings.async = false;
+	$.get("jsp/menus.json", function(result) {
+		_menus = { "menus" : result };
+		console.log(_menus);
+	});*/
+	$.ajaxSettings.async = true;
 	//设置登录窗口
 	function openPwd() {
 		$('#w').window({
@@ -67,7 +74,8 @@ toLoginPage(window);
 			return false;
 		}
 
-		$.post('/ajax/editpassword.ashx?newpass=' + $newpass.val(), function(msg) {
+		$.post('/ajax/editpassword.ashx?newpass=' + $newpass.val(), function(
+				msg) {
 			msgShow('系统提示', '恭喜，密码修改成功！<br>您的新密码为：' + msg, 'info');
 			$newpass.val('');
 			$rePass.val('');
@@ -130,10 +138,10 @@ toLoginPage(window);
 					* BLOG: <a style="font-size:24px;color:green;"
 						href="http://www.mycodes.net">猪肉炖粉条的博客</a>
 				</h1>
-				<h1 style="font-size:24px;">*
+				<!-- <h1 style="font-size:24px;">*
 					讨论群：112044258、32994605、36534121、56271061</h1>
 				<h1 style="font-size:24px;">*
-					广告：本人承接各类大中小型管理系统的软件的设计与开发，有需要的朋友联系我啦~~~~</h1>
+					广告：本人承接各类大中小型管理系统的软件的设计与开发，有需要的朋友联系我啦~~~~</h1> -->
 			</div>
 		</div>
 	</div>

@@ -11,16 +11,7 @@
 <head>
 <base href="<%=basePath%>">
 <title>修改客户资料</title>
-<link rel="stylesheet" type="text/css" href="js/themes/metro/easyui.css">
-<link rel="stylesheet" type="text/css" href="js/themes/mobile.css">
-<link rel="stylesheet" type="text/css" href="js/themes/icon.css">
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="js/jquery.easyui.mobile.js"></script>
-<script type="text/javascript" src="js/locale/easyui-lang-zh_CN.js"></script>
-<script type="text/javascript" src="js/jeasyui.extensions.validatebox.js"></script>
-<script type="text/javascript" src="js/syUtils.js"></script>
-
+<jsp:include page="/inc.jsp"></jsp:include>
 </head>
 
 <body>
@@ -32,20 +23,20 @@
 	    			<td>姓名:</td>
 	    			<td>
 	    				<input type="hidden" name="id" value="${customer.id }">
-	    				<input class="easyui-textbox" value="${customer.name }" id="guige" type="text" name="guige" data-options="required:true"></input>
+	    				<input class="easyui-textbox" value="${customer.name }" id="name" type="text" name="name" data-options="required:true"></input>
 	    			</td>
 	    		</tr>
 	    		<tr>
 	    			<td>公司名称:</td>
-	    			<td><input class="easyui-textbox" value="${customer.companyName }" type="text" name="houdu" data-options="required:true,min:0,precision:2"></input></td>
+	    			<td><input class="easyui-textbox" value="${customer.companyName }" type="text" name="companyName" data-options="required:true"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>地址:</td>
-	    			<td><input class="easyui-textbox" value="${customer.address }" type="text" name="xishu" data-options="required:true,min:0,precision:2"></input></td>
+	    			<td><input class="easyui-textbox" value="${customer.address }" type="text" name="address" data-options="required:true"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>联系电话:</td>
-	    			<td><input class="easyui-textbox" value="${customer.telephone }" type="text" name="dwj" data-options="required:true,min:0,precision:2"></input></td>
+	    			<td><input class="easyui-textbox" value="${customer.telephone }" type="text" name="telephone" data-options="required:true"></input></td>
 	    		</tr>
 	    	</table>
 	    </form>

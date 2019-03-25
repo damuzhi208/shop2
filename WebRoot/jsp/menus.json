@@ -1,100 +1,105 @@
 [{
 	"menuid": "1",
 	"icon": "icon-sys",
-	"menuname": "¿Ø¼şÊ¹ÓÃ",
+	"menuname": "æ§ä»¶ä½¿ç”¨",
 	"menus": [{
+		"menuid": "11",
+		"menuname": "äººå‘˜ä¿¡æ¯",
+		"icon": "icon-add",
+		"url": "customer/list"
+	},{
 		"menuid": "12",
-		"menuname": "·è¿ñĞã²Å",
+		"menuname": "ç–¯ç‹‚ç§€æ‰",
 		"icon": "icon-add",
 		"url": "http://www.mycodes.net"
 	}, {
 		"menuid": "13",
-		"menuname": "ÓÃ»§¹ÜÀí",
+		"menuname": "ç”¨æˆ·ç®¡ç†",
 		"icon": "icon-users",
 		"url": "demo2.html"
 	}, {
 		"menuid": "14",
-		"menuname": "½ÇÉ«¹ÜÀí",
+		"menuname": "è§’è‰²ç®¡ç†",
 		"icon": "icon-role",
 		"url": "demo2.html"
 	}, {
 		"menuid": "15",
-		"menuname": "È¨ÏŞÉèÖÃ",
+		"menuname": "æƒé™è®¾ç½®",
 		"icon": "icon-set",
 		"url": "demo.html"
 	}, {
 		"menuid": "16",
-		"menuname": "ÏµÍ³ÈÕÖ¾",
+		"menuname": "ç³»ç»Ÿæ—¥å¿—",
 		"icon": "icon-log",
 		"url": "demo1.html"
 	}]
 }, {
 	"menuid": "8",
 	"icon": "icon-sys",
-	"menuname": "Ô±¹¤¹ÜÀí",
+	"menuname": "å‘˜å·¥ç®¡ç†",
 	"menus": [{
 		"menuid": "21",
-		"menuname": "Ô±¹¤ÁĞ±í",
+		"menuname": "å‘˜å·¥åˆ—è¡¨",
 		"icon": "icon-nav",
 		"url": "demo.html"
 	}, {
 		"menuid": "22",
-		"menuname": "ÊÓÆµ¼à¿Ø",
+		"menuname": "è§†é¢‘ç›‘æ§",
 		"icon": "icon-nav",
 		"url": "demo1.html"
 	}]
 }, {
 	"menuid": "56",
 	"icon": "icon-sys",
-	"menuname": "²¿ÃÅ¹ÜÀí",
+	"menuname": "éƒ¨é—¨ç®¡ç†",
 	"menus": [{
 		"menuid": "31",
-		"menuname": "Ìí¼Ó²¿ÃÅ",
+		"menuname": "æ·»åŠ éƒ¨é—¨",
 		"icon": "icon-nav",
 		"url": "demo1.html"
 	}, {
 		"menuid": "32",
-		"menuname": "²¿ÃÅÁĞ±í",
+		"menuname": "éƒ¨é—¨åˆ—è¡¨",
 		"icon": "icon-nav",
 		"url": "demo2.html"
 	}]
 }, {
 	"menuid": "28",
 	"icon": "icon-sys",
-	"menuname": "²ÆÎñ¹ÜÀí",
+	"menuname": "è´¢åŠ¡ç®¡ç†",
 	"menus": [{
 		"menuid": "41",
-		"menuname": "ÊÕÖ§·ÖÀà",
+		"menuname": "æ”¶æ”¯åˆ†ç±»",
 		"icon": "icon-nav",
 		"url": "demo.html"
 	}, {
 		"menuid": "42",
-		"menuname": "±¨±íÍ³¼Æ",
+		"menuname": "æŠ¥è¡¨ç»Ÿè®¡",
 		"icon": "icon-nav",
 		"url": "demo1.html"
 	}, {
 		"menuid": "43",
-		"menuname": "Ìí¼ÓÖ§³ö",
+		"menuname": "æ·»åŠ æ”¯å‡º",
 		"icon": "icon-nav",
 		"url": "demo2.html"
 	}]
 }, {
 	"menuid": "39",
 	"icon": "icon-sys",
-	"menuname": "ÉÌ³Ç¹ÜÀí",
+	"menuname": "å•†åŸç®¡ç†",
 	"menus": [{
 		"menuid": "51",
-		"menuname": "ÉÌÆ··ÖÀà",
+		"menuname": "å•†å“åˆ†ç±»",
 		"icon": "icon-nav",
 		"url": "demo.html"
 	}, {
 		"menuid": "52",
-		"menuname": "ÉÌÆ·ÁĞ±í",
+		"menuname": "å•†å“åˆ—è¡¨",
 		"icon": "icon-nav",
 		"url": "demo1.html"
 	}, {
 		"menuid": "53",
-		"menuname": "ÉÌÆ·¶©µ¥",
+		"menuname": "å•†å“è®¢å•",
 		"icon": "icon-nav",
 		"url": "demo2.html"
 	}]
