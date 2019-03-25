@@ -15,7 +15,7 @@ $(function(){
 	tabClose();
 	tabCloseEven();
 
-	$('#tabs').tabs('add',{
+	/*$('#tabs').tabs('add',{
 		title:'疯狂秀才',
 		content:createFrame('baseqj/list')
 	}).tabs({
@@ -28,7 +28,7 @@ $(function(){
 				$('#tabs').tabs('update', { tab: currTab, options: { content: createFrame(src)} });
 			}
         }
-    });
+    });*/
 
 });
 
