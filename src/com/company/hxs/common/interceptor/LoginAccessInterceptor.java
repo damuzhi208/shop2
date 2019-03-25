@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.company.hxs.common.sys.SysConstant;
 import com.company.hxs.common.util.CTools;
 
-@SuppressWarnings({"unchecked"})
+@SuppressWarnings({"unchecked", "serial", "rawtypes"})
 public class LoginAccessInterceptor implements HandlerInterceptor  {
 
 	private static Set<String> UN_LOGIN_EXPOSE_METHODS = new HashSet() {};
