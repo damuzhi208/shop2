@@ -16,7 +16,7 @@ public class TBaseQiaojia {
 	 * 主键，自增长
 	 */
 	@Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
 	private String id;
 	
 	/**

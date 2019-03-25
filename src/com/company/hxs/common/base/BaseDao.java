@@ -22,9 +22,9 @@ import com.company.hxs.base.dao.SqlCommonDao;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class BaseDao<E, PK extends Serializable> extends SqlCommonDao implements IBaseDao<E, PK> {
-	
-	@Resource
-	protected HibernateTemplate hibernateTemplate;
+//	
+//	@Resource
+//	protected HibernateTemplate hibernateTemplate;
 	protected Class<E> type;
 
 	public HibernateTemplate getHibernateTemplate() {

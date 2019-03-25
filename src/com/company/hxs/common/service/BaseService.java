@@ -15,7 +15,6 @@ import com.company.hxs.base.dao.SqlCommonDao;
 import com.company.hxs.common.IBaseService;
 import com.company.hxs.common.JSONConfigFactory;
 
-@Transactional
 public class BaseService implements IBaseService{
 
 	@Resource protected SqlCommonDao sqlCommonDao;
@@ -32,6 +31,16 @@ public class BaseService implements IBaseService{
 		JSONArray array = JSONArray.fromObject(result, JSONConfigFactory.getYMDHMSConfig());
 		JSONObject json = new JSONObject();
 		json.put("total", total);
+		json.put("rows", array);
+		return json.toString();
+	}
+	
+	public static String List2Json4FullDate(List<?> result, List<?> footer, Integer total) {
+		JSONArray array = JSONArray.fromObject(result, JSONConfigFactory.getYMDHMSConfig());
+		JSONArray footerArray = JSONArray.fromObject(footer, JSONConfigFactory.getYMDHMSConfig());
+		JSONObject json = new JSONObject();
+		json.put("total", total);
+		json.put("footer", footerArray);
 		json.put("rows", array);
 		return json.toString();
 	}
@@ -128,6 +137,7 @@ public class BaseService implements IBaseService{
 	}
 
 	@Override
+	@Transactional
 	public boolean saveOrUpdate(Object obj) {
 		try {
 			this.sqlCommonDao.saveOrUpdate(obj);

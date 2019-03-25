@@ -1,7 +1,12 @@
 package com.company.hxs.basedata.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,11 +15,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.company.hxs.basedata.entity.TBaseCustomer;
 import com.company.hxs.basedata.service.TBaseCustomerService;
 import com.company.hxs.common.Page;
+import com.company.hxs.common.controller.BaseController;
 import com.company.hxs.common.service.BaseService;
+import com.company.hxs.common.vo.SelectVO;
 
 @Controller
 @RequestMapping("customer")
-public class TBaseCustomerController {
+public class TBaseCustomerController extends BaseController{
 	
 	@Resource private TBaseCustomerService tBaseCustomerService;
 	
@@ -40,8 +47,10 @@ public class TBaseCustomerController {
 	 */
 	@RequestMapping("modCustomer")
 	public String modCustomer(HttpServletRequest request, Integer id){
-		TBaseCustomer customer = tBaseCustomerService.getTBaseCustomer(id);
-		request.setAttribute("customer", customer);
+		if(id != null){
+			TBaseCustomer customer = tBaseCustomerService.getTBaseCustomer(id);
+			request.setAttribute("customer", customer);
+		}
 		return "basedata/modCustomer";
 	}
 	
@@ -51,8 +60,23 @@ public class TBaseCustomerController {
 	 */
 	@RequestMapping("updateCustomer")
 	@ResponseBody
-	public String updateCustomer(){
-		return null;
+	public String updateCustomer(TBaseCustomer customer){
+		JSONObject js = new JSONObject();
+		try{
+			tBaseCustomerService.updateTBaseCustomer(customer);
+			js = createResult(true, "保存成功");
+		}catch(Exception e){
+			e.printStackTrace();
+			js = createResult(false, "出错："+e.getMessage());
+		}
+		return js.toString();
+	}
+	
+	@RequestMapping("select")
+	@ResponseBody
+	public String getSelectCustomer(){
+		List<SelectVO> list = tBaseCustomerService.getSelectList();
+		return JSONArray.fromObject(list).toString();
 	}
 	
 }

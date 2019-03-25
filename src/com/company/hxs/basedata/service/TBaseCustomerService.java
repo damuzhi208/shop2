@@ -6,14 +6,17 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.company.hxs.basedata.dao.TBaseCustomerDao;
 import com.company.hxs.basedata.entity.TBaseCustomer;
 import com.company.hxs.common.Page;
 import com.company.hxs.common.service.BaseService;
 import com.company.hxs.common.util.CTools;
+import com.company.hxs.common.vo.SelectVO;
 
 @Service
+@Transactional(readOnly= false)
 public class TBaseCustomerService extends BaseService{
 
 	@Resource private TBaseCustomerDao tBaseCustomerDao;
@@ -40,4 +43,21 @@ public class TBaseCustomerService extends BaseService{
 		return tBaseCustomerDao.get(TBaseCustomer.class, id);
 	}
 
+	@Transactional
+	public void updateTBaseCustomer(TBaseCustomer customer){
+		if(customer != null && customer.getId() != null){
+			tBaseCustomerDao.update(customer);
+		}else{
+			tBaseCustomerDao.save(customer);
+		}
+	}
+
+	/**
+	 * 获取下拉
+	 * @return
+	 */
+	public List<SelectVO> getSelectList() {
+		String sql = "select CAST(t.id AS CHAR) id,t.`name` from t_base_customer t";
+		return sqlCommonDao.findListBySqlAsAliasToBean2(sql, SelectVO.class);
+	}
 }

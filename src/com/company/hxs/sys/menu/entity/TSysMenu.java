@@ -16,7 +16,7 @@ import javax.persistence.Table;
 public class TSysMenu {
 
 	@Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Integer menuId;//
 
 	private String menuName;//菜单名称

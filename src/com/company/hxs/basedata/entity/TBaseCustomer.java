@@ -6,6 +6,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * 客户基本信息
+ * @author luqi
+ *
+ */
 @Entity
 @Table(name = "t_base_customer")
 public class TBaseCustomer {
@@ -14,7 +19,7 @@ public class TBaseCustomer {
 	 * 主键
 	 */
 	@Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Integer id;
 	
 	/**

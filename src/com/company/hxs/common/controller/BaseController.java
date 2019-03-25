@@ -87,7 +87,7 @@ public class BaseController {
 	protected String downFile(File file, String fileName, HttpServletResponse res) throws IOException {
 		OutputStream os = null;
 		if ((file == null) || (!file.exists())) {
-			return "鏂囦欢涓嶅瓨鍦�";
+			return "文件为空";
 		}
 		try {
 			os = res.getOutputStream();
@@ -99,7 +99,7 @@ public class BaseController {
 			os.flush();
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "涓嬭浇鏂囦欢涓嶆垚鍔�";
+			return "文件下载报错";
 		} finally {
 			if (os != null) {
 				os.close();

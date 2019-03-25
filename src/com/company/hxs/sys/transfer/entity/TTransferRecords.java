@@ -9,6 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * 商品调动记录
  * @author luqi
@@ -22,7 +26,7 @@ public class TTransferRecords {
 	 * 主键
 	 */
 	@Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Integer id;
 	
 	/**
@@ -63,11 +67,15 @@ public class TTransferRecords {
 	/**
 	 * 调动时间
 	 */
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date transDate;
 	
 	/**
 	 * 操作时间
 	 */
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date createTime;
 
 	public Integer getId() {
