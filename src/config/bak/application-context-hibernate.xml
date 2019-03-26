@@ -32,7 +32,6 @@
 		<property name="packagesToScan"><!-- annotatedClasses -->
 			<list>
 				<value>com.company.hxs.*.entity</value>
-				<value>com.company.hxs.*.*.entity</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -65,6 +64,24 @@
 		</property>
 	</bean>
 	
+	<!-- 配置事务的传播特性 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="save*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="delete*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="modify*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="update*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="UtilFormPropertyToEnt" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="get*Id" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- 那些类的哪些方法参与事务 -->
+	<aop:config>
+		<aop:advisor pointcut="execution(* com.company.hxs.*.service.*Service.*(..))" advice-ref="txAdvice" />
+	</aop:config>
 	
 	<!-- 声明可以使用注解配置事务管理 -->
 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>

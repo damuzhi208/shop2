@@ -13,11 +13,7 @@
 
 	<mvc:annotation-driven />
 	<!-- 自动扫描bean -->
-<!-- 	<context:component-scan base-package="com.company.hxs.*.controller" ></context:component-scan>   -->
-	
-	<context:component-scan base-package="com.company.hxs" use-default-filters="false"> 
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-	</context:component-scan> 
+	<context:component-scan base-package="com.company.hxs"></context:component-scan>
 	
 	<!-- 访问url前后缀配置 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/jsp/" p:suffix=".jsp" />
