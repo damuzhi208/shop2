@@ -39,7 +39,7 @@
 	    		</tr>
 	    		<tr>
 	    			<td>数量:</td>
-	    			<td><input class="easyui-textbox" value="${record.nums }" type="text" name="nums" data-options="required:true,min:0,precision:2"/></td>
+	    			<td><input class="easyui-numberbox" value="${record.nums }" type="text" name="nums" data-options="required:true,min:0,precision:2"/></td>
 	    		</tr>
 	    		<tr>
 	    			<td>单位:</td>
@@ -55,15 +55,20 @@
 	    		</tr>
 	    		<tr>
 	    			<td>成本价:</td>
-	    			<td><input class="easyui-textbox" value="${record.cost }" type="text" name="cost" data-options="required:true,min:0,precision:2"/></td>
+	    			<td><input class="easyui-numberbox" value="${record.cost }" type="text" name="cost" data-options="required:true,min:0,precision:2"/></td>
 	    		</tr>
 	    		<tr>
 	    			<td>交易价格:</td>
-	    			<td><input class="easyui-textbox" value="${record.salePrice }" type="text" name="salePrice" data-options="required:true,min:0,precision:2"/></td>
+	    			<td><input class="easyui-numberbox" value="${record.salePrice }" type="text" name="salePrice" data-options="required:true,min:0,precision:2"/></td>
 	    		</tr>
 	    	</table>
 	    </form>
 	    </div>
 	</div>
+	<!-- <script type="text/javascript">
+	$('input[type!="hidden"],select,textarea',$("#formId")).each(function(){  
+	    $(this).validatebox();  
+	}); 
+	</script> -->
 </body>
 </html>
