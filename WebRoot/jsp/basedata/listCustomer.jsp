@@ -15,11 +15,12 @@
 </head>
 <body>
   <div class="easyui-layout" fit="true" style="border:none;">
-		<div id="toolbar" style="height: 30px;">
+		<div id="toolbar" style="height: 44px;padding:7px 2px">
 			姓名：<input type="text" name="name" />
 			公司名称：<input type="text" name="companyName" />
-			<span class="btn pull-right" onclick="addBtnClick();">新增</span>
-			<span class="btn pull-right" onclick="doSearch();">搜索</span>
+			下拉框：<input class="easyui-combobox" value="${record.unit }" type="text" name="unit" data-options="required:true,valueField:'id',textField:'name',url:'baseUnit/select'"/>
+			<span class="easyui-addbtn" onclick="addBtnClick();">新增</span>
+			<span class="easyui-searchbtn" onclick="doSearch();">搜索</span>
 		</div>  		
 		<div data-options="region:'center',border:false" style=" border:none">
 			<table id="datagrid" class="easyui-datagrid"  fit="true" 
