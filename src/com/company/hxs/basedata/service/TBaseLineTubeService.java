@@ -13,6 +13,7 @@ import com.company.hxs.basedata.entity.TBaseLineTube;
 import com.company.hxs.common.Page;
 import com.company.hxs.common.service.BaseService;
 import com.company.hxs.common.util.CTools;
+import com.company.hxs.common.vo.SelectVO;
 
 @Service
 public class TBaseLineTubeService extends BaseService{
@@ -57,6 +58,16 @@ public class TBaseLineTubeService extends BaseService{
 		if(line != null){
 			tBaseLineTubeDao.delete(line);
 		}
+	}
+
+	/**
+	 * 查询下拉数据
+	 * @return
+	 */
+	public List<SelectVO> getSelectList() {
+		String sql = "select cast(l.id as char) id,CONCAT('【',case when l.mType = '1' then '金属软管' when l.mType = '2' then '线管' else '未知' end,'】【',l.guige,'】单位[',b.`name`,']单价[',l.danjia,']') name "
+				+ " from t_base_linetube l,t_base_unit b where l.danwei = b.id";
+		return sqlCommonDao.findListBySqlAsAliasToBean2(sql, SelectVO.class);
 	}
 
 }

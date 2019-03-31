@@ -1,9 +1,12 @@
 package com.company.hxs.basedata.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.springframework.stereotype.Controller;
@@ -16,6 +19,7 @@ import com.company.hxs.common.Page;
 import com.company.hxs.common.controller.BaseController;
 import com.company.hxs.common.service.BaseService;
 import com.company.hxs.common.util.ResponseTool;
+import com.company.hxs.common.vo.SelectVO;
 
 @Controller
 @RequestMapping("lineTube")
@@ -90,4 +94,10 @@ public class TBaseLineTubeController extends BaseController{
 		ResponseTool.write(response, js);
 	}
 	
+	@RequestMapping("select")
+	@ResponseBody
+	public String getSelect(){
+		List<SelectVO> voList = tBaseLineTubeService.getSelectList();
+		return JSONArray.fromObject(voList).toString();
+	}
 }
