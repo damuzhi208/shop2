@@ -27,7 +27,8 @@ function statusFormatter(value,row,index){
  * @param index
  */
 function opFormatter(value,row,index){
-	return '<a href="javascript:void(0)" onclick="modUnit(\''+row.id+'\', \''+row.name+'\')">修改</a>';
+	return '<a href="javascript:void(0)" class="easyui-editbtn" onclick="modUnit(\''+row.id+'\', \''+row.name+'\')">修改</a>'
+		+'<a href="javascript:void(0)" class="easyui-delbtn" onclick="delUnit(\''+row.id+'\', \''+row.name+'\')">删除</a>';
 }
 
 function modUnit(pId, name){
@@ -70,3 +71,15 @@ function addBtnClick(){
 	modUnit(null, "");
 }
 
+function delUnit(id, name){
+	$.messager.confirm("操作提示", "数据删除后无法恢复，确定删除？", function(data) {
+		if (data) {
+			$.post("baseUnit/delUnit?id="+id , function(js){ 
+				$.messager.alert('提示', js.msg);
+				if(js.success){
+					doSearch();
+				}
+			},'json');
+		}
+	});
+}

@@ -31,14 +31,14 @@ toLoginPage(window);
 <%}%>
 </script>
 <script type="text/javascript">
-	//var _menus = { "menus" : JSON.parse('${menus}') };
-	var _menus = null;
+	var _menus = { "menus" : JSON.parse('${menus}') };
+	/*var _menus = null;
 	$.ajaxSettings.async = false;
 	$.get("jsp/menus.json", function(result) {
 		_menus = { "menus" : result };
 		console.log(_menus);
 	});
-	$.ajaxSettings.async = true;
+	$.ajaxSettings.async = true;*/
 	//设置登录窗口
 	function openPwd() {
 		$('#w').window({

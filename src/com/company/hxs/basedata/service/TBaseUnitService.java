@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.company.hxs.basedata.dao.TBaseUnitDao;
 import com.company.hxs.basedata.entity.TBaseUnit;
@@ -41,6 +42,19 @@ public class TBaseUnitService extends BaseService{
 		String sql = "select cast(t.id as char) id,t.name from t_base_unit t";
 		List<SelectVO> list = sqlCommonDao.findListBySqlAsAliasToBean2(sql, SelectVO.class);
 		return list;
+	}
+
+	/**
+	 * É¾³ýUnit
+	 * @param id
+	 */
+	@Transactional
+	public void delUnit(Integer id) {
+		TBaseUnit unit = tBaseUnitDao.get(TBaseUnit.class, id);
+		if(unit != null){
+			tBaseUnitDao.delete(unit);
+		}
+		
 	}
 
 }

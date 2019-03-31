@@ -15,10 +15,10 @@
 </head>
 <body>
   <div class="easyui-layout" fit="true" style="border:none;">
-		<div id="toolbar" style="height: 30px;">
-			单位名称：<input type="text" name="guige" />
-			<span class="btn pull-right" onclick="addBtnClick();">新增</span>
-			<span class="btn pull-right" onclick="doSearch();">搜索</span>
+		<div id="toolbar" style="height: 44px;padding:7px 2px">
+			单位名称：<input type="text" name="name" />
+			<span class="easyui-searchbtn" onclick="doSearch();">搜索</span>
+			<span class="easyui-addbtn" onclick="addBtnClick();">新增</span>
 		</div>  		
 		<div data-options="region:'center',border:false" style=" border:none">
 			<table id="datagrid" class="easyui-datagrid"  fit="true" 

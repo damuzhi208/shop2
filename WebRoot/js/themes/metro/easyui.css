@@ -603,7 +603,7 @@ a{
   border-width: 0;
   padding: 1px;
 }
-.easyui-addbtn,.easyui-searchbtn,.easyui-editbtn{
+.easyui-addbtn,.easyui-searchbtn,.easyui-editbtn,.easyui-delbtn{
   display: inline-block;
   position:relative;
   padding:0 10px;
@@ -621,12 +621,22 @@ a{
 .easyui-searchbtn{
 	background-color:#FF6633;
 }
+.easyui-delbtn{
+	background-color:#FF6633;
+}
 .easyui-editbtn{
 	height:24px;
 	font-size:12px;
 	line-height:24px;
 	padding:0 6px;
 	background-color:#339900;
+}
+.easyui-delbtn{
+	height:24px;
+	font-size:12px;
+	line-height:24px;
+	padding:0 6px;
+	background-color:#DC143C;
 }
 .l-btn-left {
   display: inline-block;

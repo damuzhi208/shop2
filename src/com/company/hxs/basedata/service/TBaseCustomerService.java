@@ -53,11 +53,25 @@ public class TBaseCustomerService extends BaseService{
 	}
 
 	/**
-	 * 获取下拉
+	 * 获取下拉顾客信息
 	 * @return
 	 */
 	public List<SelectVO> getSelectList() {
 		String sql = "select CAST(t.id AS CHAR) id,t.`name` from t_base_customer t";
 		return sqlCommonDao.findListBySqlAsAliasToBean2(sql, SelectVO.class);
+	}
+
+	public List<SelectVO> getCusType() {
+		SelectVO vo1 = new SelectVO();
+		vo1.setId("1");
+		vo1.setName("顾客");
+		
+		SelectVO vo2 = new SelectVO();
+		vo2.setId("2");
+		vo2.setName("同行");
+		List<SelectVO> list = new ArrayList<>();
+		list.add(vo1);
+		list.add(vo2);
+		return list;
 	}
 }

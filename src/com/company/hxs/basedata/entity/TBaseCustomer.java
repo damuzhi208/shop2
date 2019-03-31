@@ -42,6 +42,11 @@ public class TBaseCustomer {
 	 */
 	private String telephone;
 
+	/**
+	 * ¹Ë¿ÍÀà±ð£¬1
+	 */
+	private Integer cusType;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -80,6 +85,14 @@ public class TBaseCustomer {
 
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
+	}
+
+	public Integer getCusType() {
+		return cusType;
+	}
+
+	public void setCusType(Integer cusType) {
+		this.cusType = cusType;
 	}
 
 }

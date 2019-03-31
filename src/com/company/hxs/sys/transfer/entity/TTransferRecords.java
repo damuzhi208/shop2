@@ -50,9 +50,14 @@ public class TTransferRecords {
 	private BigDecimal cost;
 	
 	/**
-	 * 利润
+	 * 成交价格
 	 */
 	private BigDecimal salePrice;
+	
+	/**
+	 * 利润
+	 */
+	private BigDecimal profit;
 	
 	/**
 	 * 调动类型，1调进2调出
@@ -156,6 +161,14 @@ public class TTransferRecords {
 
 	public void setUnit(Integer unit) {
 		this.unit = unit;
+	}
+
+	public BigDecimal getProfit() {
+		return profit;
+	}
+
+	public void setProfit(BigDecimal profit) {
+		this.profit = profit;
 	}
 	
 }

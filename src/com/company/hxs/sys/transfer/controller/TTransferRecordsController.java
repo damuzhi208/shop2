@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.company.hxs.common.Page;
 import com.company.hxs.common.controller.BaseController;
 import com.company.hxs.common.service.BaseService;
+import com.company.hxs.common.util.ResponseTool;
 import com.company.hxs.common.vo.SelectVO;
 import com.company.hxs.sys.transfer.entity.TTransferRecords;
 import com.company.hxs.sys.transfer.service.TTransferRecordsService;
@@ -78,15 +80,16 @@ public class TTransferRecordsController extends BaseController{
 	 */
 	@RequestMapping("updateTransFer")
 	@ResponseBody
-	public String updateTransfer(@Validated TTransferRecords record,BindingResult result){
+	public void updateTransfer(HttpServletResponse response, @Validated TTransferRecords record,BindingResult result){
 		JSONObject js = new JSONObject();
 		try{
 			tTransferRecordsService.saveOrUpdateRecord(record);
-			js = createResult(true, null);
+			js = createResult(true, "±£´æ³É¹¦");
 		}catch(Exception e){
 			js = createResult(false, "²Ù×÷Ê§°Ü£º" + e.getMessage());
+			e.printStackTrace();
 		}
-		return js.toString();
+		ResponseTool.write(response, js);
 	}
 	
 	@RequestMapping("getTransType")
@@ -94,6 +97,24 @@ public class TTransferRecordsController extends BaseController{
 	public String getTransType(){
 		List<SelectVO> list = tTransferRecordsService.getSelectList();
 		return JSONArray.fromObject(list).toString();
+	}
+	
+	/**
+	 * É¾³ý
+	 * @param id
+	 */
+	@RequestMapping("delTransRecord")
+	@ResponseBody
+	public void delTransRecord(HttpServletResponse response, Integer id){
+		JSONObject js = new JSONObject();
+		try{
+			tTransferRecordsService.deleteRecord(id);
+			js = createResult(true, "É¾³ý³É¹¦");
+		}catch(Exception e){
+			js = createResult(false, "É¾³ýÊ§°Ü£º" + e.getMessage());
+			e.printStackTrace();
+		}
+		ResponseTool.write(response, js);
 	}
 	
 }

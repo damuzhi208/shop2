@@ -30,8 +30,8 @@ public class TTransferRecordsService extends BaseService{
 	 * @return
 	 */
 	public Page<TTransferRecordsVO> getPageResult(TTransferRecordsVO vo, Integer page, Integer rows) {
-		StringBuffer sql = new StringBuffer("select r.id,r.shopName,r.nums,r.unit,r.cost,r.salePrice,r.transType,r.transDate,r.createTime,c.`name` customerName,c.companyName,c.telephone ");
-			sql.append(" from t_transfer_records r,t_base_customer c where r.customerId = c.id");
+		StringBuffer sql = new StringBuffer("select r.id,r.shopName,r.nums,r.unit,r.cost,r.salePrice,r.transType,r.transDate,r.createTime,r.profit,c.`name` customerName,c.companyName,c.telephone,b.name unitStr ");
+			sql.append(" from t_transfer_records r,t_base_customer c,t_base_unit b where r.customerId = c.id and b.id = r.unit ");
 		List<Object> params = new ArrayList<Object>();
 		if(vo != null){
 			if(CTools.isNotEmpty(vo.getCustomerName())){
@@ -45,7 +45,7 @@ public class TTransferRecordsService extends BaseService{
 		}
 		List<TTransferRecordsVO> voList = sqlCommonDao.findListBySqlAsAliasToBean2(sql.toString(), TTransferRecordsVO.class, params.toArray(), page, rows);
 		
-		String sumSql = "select '合计' shopName,sum(o.nums) nums,sum(o.cost) cost,sum(o.salePrice) salePrice from (" + sql.toString() + ") o where 1 = 1";
+		String sumSql = "select '合计' shopName,sum(o.nums) nums,sum(o.profit) profit from (" + sql.toString() + ") o where 1 = 1";
 		List<TTransferRecordsVO> footer = sqlCommonDao.findListBySqlAsAliasToBean2(sumSql, TTransferRecordsVO.class, params.toArray());
 		Integer total = tTransferRecordsDao.sqlGetCount("select count(1) from ("+sql.toString()+") o", params.toArray());
 		return Page.create(voList, footer, total);
@@ -83,6 +83,16 @@ public class TTransferRecordsService extends BaseService{
 		voList.add(vo1);
 		voList.add(vo2);
 		return voList;
+	}
+
+	/**
+	 * 删除
+	 * @param id
+	 */
+	@Transactional
+	public void deleteRecord(Integer id) {
+		TTransferRecords record = tTransferRecordsDao.get(TTransferRecords.class, id);
+		tTransferRecordsDao.delete(record);
 	}
 
 }

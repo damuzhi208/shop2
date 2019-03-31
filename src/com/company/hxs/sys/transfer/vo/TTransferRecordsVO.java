@@ -28,14 +28,24 @@ public class TTransferRecordsVO {
 	private Integer unit;
 	
 	/**
+	 * 单位，个，米
+	 */
+	private String unitStr;
+	
+	/**
 	 * 调动价格
 	 */
 	private BigDecimal cost;
 	
 	/**
-	 * 利润
+	 * 交易价格
 	 */
 	private BigDecimal salePrice;
+	
+	/**
+	 * 利润
+	 */
+	private BigDecimal profit;
 	
 	/**
 	 * 调动类型，1调进2调出
@@ -174,6 +184,22 @@ public class TTransferRecordsVO {
 
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
+	}
+
+	public BigDecimal getProfit() {
+		return profit;
+	}
+
+	public void setProfit(BigDecimal profit) {
+		this.profit = profit;
+	}
+
+	public String getUnitStr() {
+		return unitStr;
+	}
+
+	public void setUnitStr(String unitStr) {
+		this.unitStr = unitStr;
 	}
 	
 }

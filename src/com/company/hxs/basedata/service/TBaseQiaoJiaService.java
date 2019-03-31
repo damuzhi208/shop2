@@ -13,6 +13,7 @@ import com.company.hxs.basedata.entity.TBaseQiaojia;
 import com.company.hxs.common.Page;
 import com.company.hxs.common.service.BaseService;
 import com.company.hxs.common.util.CTools;
+import com.company.hxs.common.vo.SelectVO;
 
 @Service
 public class TBaseQiaoJiaService extends BaseService {
@@ -68,6 +69,11 @@ public class TBaseQiaoJiaService extends BaseService {
 	@Transactional
 	public void updateTBaseQj(TBaseQiaojia qiaojia) {
 		tBaseQiaojiaDao.saveOrUpdate(qiaojia);
+	}
+
+	public List<SelectVO> getQjSelect() {
+		String sql = "select cast(t.id as char) id,CONCAT('【',t.guige,'】厚度[',IFNULL(t.houdu,0),']系数[',IFNULL(t.xishu,0),']吨位价[',IFNULL(t.dwj,0),']单价[',IFNULL(t.danjia, 0),']') name from t_base_qiaojia t where t.type = 1";
+		return tBaseQiaojiaDao.findListBySqlAsAliasToBean2(sql, SelectVO.class);
 	}
 
 }

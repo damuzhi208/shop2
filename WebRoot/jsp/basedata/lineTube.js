@@ -28,7 +28,7 @@ function mTypeFormatter(value,row,index){
  * @param index
  */
 function opFormatter(value,row,index){
-	return '<a href="javascript:void(0)" onclick="modLine(\''+row.id+'\', \''+row.guige+'\', \''+row.type+'\')">修改</a>';
+	return '<a href="javascript:void(0)" class="easyui-editbtn" onclick="modLine(\''+row.id+'\', \''+row.guige+'\', \''+row.type+'\')">修改</a>';
 }
 
 function modLine(pId, guige, type){

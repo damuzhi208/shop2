@@ -32,15 +32,25 @@ function YMDDateFormatter(value,row,index){
  * @param index
  */
 function opFormatter(value,row,index){
-	return '<a href="javascript:void(0)" onclick="modLine(\''+row.id+'\', \''+row.name+'\')">修改</a>';
+	return '<a href="javascript:void(0)" class="easyui-editbtn" onclick="modStockQj(\''+row.id+'\', \''+row.name+'\')">修改</a>';
 }
 
-function modLine(pId, name){
+/**
+ * 修改
+ * @param pId
+ * @param name
+ * @returns {Boolean}
+ */
+function modStockQj(pId, name){
+	var url = "stock/modstockQj";
+	if(pId){
+		url += "?id=" + pId;
+	}
 	modelDialog = sy.iframeDialog({
-		"href" : "customer/modCustomer?id="+pId,
-		"height" : $('body', document).height() * 0.5,
-		"width" : $('body', document).width() * 0.4,
-		"title" : name,
+		"href" : url,
+		"height" : 210,
+		"width" : 580,
+		"title" : "【入库编辑】",
 		"buttons": [
               {
             	  text : '确定',handler : function() {
@@ -67,30 +77,9 @@ function modLine(pId, name){
 	return false;
 }
 
+/**
+ * 新增
+ */
 function addBtnClick(){
-	top.openTab('',basePath+'hr/modPositive');
-}
-
-function editBtnClick(){
-	var row = $("#datagrid").datagrid('getSelected');
-	if(!row){
-		showInfo({msg:''});
-		return;
-	}
-	top.openTab(row.infoName,basePath+'hr/modPositive?id='+row.id);
-}
-function delBtnClick(){
-	var row = $("#datagrid").datagrid('getSelected');
-	if(!row){
-		showInfo({msg:'请选择记录'});
-		return;
-	}
-	showConfirm('提示','确定？',function(){
-		var url = basePath + 'singleTable/jsonDelete?entityClass=HrPositive&id='+row.id;
-		$.post(url,function(js){
-			showInfo({msg:js.msg});
-			if(js.success)
-				$("#datagrid").datagrid('deleteRow',$("#datagrid").datagrid('getRowIndex',row));
-		},'json');
-	});
+	modStockQj(null, null);
 }

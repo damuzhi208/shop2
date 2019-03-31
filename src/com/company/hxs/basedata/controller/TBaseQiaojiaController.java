@@ -1,8 +1,11 @@
 package com.company.hxs.basedata.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.springframework.stereotype.Controller;
@@ -14,6 +17,7 @@ import com.company.hxs.basedata.service.TBaseQiaoJiaService;
 import com.company.hxs.common.Page;
 import com.company.hxs.common.controller.BaseController;
 import com.company.hxs.common.service.BaseService;
+import com.company.hxs.common.vo.SelectVO;
 
 @Controller
 @RequestMapping("baseqj")
@@ -67,6 +71,17 @@ public class TBaseQiaojiaController extends BaseController{
 			js = createResult(false, "错误信息：" + e.getMessage());
 		}
 		return js.toString();
+	}
+	
+	/**
+	 * 桥架基本类型
+	 * @return
+	 */
+	@RequestMapping("getQjSelect")
+	@ResponseBody
+	public String getQjSelect(){
+		List<SelectVO> list = tBaseQiaoJiaService.getQjSelect();
+		return JSONArray.fromObject(list).toString();
 	}
 	
 }

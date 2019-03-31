@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -17,6 +18,7 @@ import com.company.hxs.basedata.service.TBaseUnitService;
 import com.company.hxs.common.Page;
 import com.company.hxs.common.controller.BaseController;
 import com.company.hxs.common.service.BaseService;
+import com.company.hxs.common.util.ResponseTool;
 import com.company.hxs.common.vo.SelectVO;
 
 @Controller
@@ -64,7 +66,7 @@ public class TBaseUnitController extends BaseController{
 	 */
 	@RequestMapping("updateUnit")
 	@ResponseBody
-	public String updateUnit(TBaseUnit unit){
+	public void updateUnit(HttpServletResponse response, TBaseUnit unit){
 		JSONObject js = new JSONObject();
 		try{
 			tBaseUnitService.saveOrUpdate(unit);
@@ -72,7 +74,20 @@ public class TBaseUnitController extends BaseController{
 		}catch(Exception e){
 			js = createResult(false, "±£´æÊ§°Ü£º" + e.getMessage());
 		}
-		return js.toString();
+		ResponseTool.write(response, js);
+	}
+	
+	@RequestMapping("delUnit")
+	@ResponseBody
+	public void delUnit(HttpServletResponse response, Integer id){
+		JSONObject js = new JSONObject();
+		try{
+			tBaseUnitService.delUnit(id);
+			js = createResult(true, "É¾³ý³É¹¦");
+		}catch(Exception e){
+			js = createResult(false, "É¾³ýÊ§°Ü£º" + e.getMessage());
+		}
+		ResponseTool.write(response, js);
 	}
 	
 	/**

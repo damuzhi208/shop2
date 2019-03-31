@@ -11,31 +11,24 @@
 <base href="<%=basePath%>" />
 <title>桥架基础数据</title>
 <meta charset="utf-8" />
-<link rel="stylesheet" type="text/css" href="js/themes/metro/easyui.css">  
-<link rel="stylesheet" type="text/css" href="js/themes/mobile.css">  
-<link rel="stylesheet" type="text/css" href="js/themes/icon.css">  
-<script type="text/javascript" src="js/jquery.min.js"></script>  
-<script type="text/javascript" src="js/jquery.easyui.min.js"></script> 
-<script type="text/javascript" src="js/jquery.easyui.mobile.js"></script>
-<script type="text/javascript" src="js/locale/easyui-lang-zh_CN.js"></script>
-<script type="text/javascript" src="js/syUtils.js"></script> 
+<jsp:include page="/inc.jsp"></jsp:include>
 </head>
 <body>
   <div class="easyui-layout" fit="true" style="border:none;">
-		<div id="toolbar" style="height: 30px;">
+		<div id="toolbar" style="height: 44px;padding:7px 2px">
 			规格：<input type="text" name="guige" />
-			桥架类型：<select name="mType">
-						<option value="">==全部==</option>
+			桥架类型：<select name="mType" class="easyui-combobox" panelHeight="100" style="width: 172px;">
+						<option value="">全部</option>
 						<option value="1">喷塑桥架</option>
 						<option value="2">镀锌桥架</option>
-					  </select>
-			桥架/盖板：<select name="type">
-						<option value="">==全部==</option>
+					</select>
+			桥架/盖板：<select name="type" class="easyui-combobox" panelHeight="100" style="width: 172px;">
+						<option value="">全部</option>
 						<option value="1">桥架</option>
 						<option value="2">盖板</option>
-					  </select>
-			<span class="btn pull-right" onclick="addBtnClick();">新增</span>
-			<span class="btn pull-right" onclick="doSearch();">搜索</span>
+					</select>
+			<span class="easyui-searchbtn" onclick="doSearch();">搜索</span>
+			<span class="easyui-addbtn" onclick="addBtnClick();">新增</span>
 		</div>  		
 		<div data-options="region:'center',border:false" style=" border:none">
 			<table id="datagrid" class="easyui-datagrid"  fit="true" 

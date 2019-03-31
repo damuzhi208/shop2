@@ -16,9 +16,15 @@
 
 <body>
 	<div class="easyui-panel" style="width:96%">
-		<div style="padding:10px 60px 20px 60px">
 	    <form id="ff" method="post" action="customer/updateCustomer" >
 	    	<table cellpadding="5" align="center">
+	    		<tr>
+	    			<td>顾客类别:</td>
+	    			<td>
+	    				<input class="easyui-combobox" value="${customer.cusType }" type="text" name="unit" panelHeight="100"
+	    				 data-options="required:true,valueField:'id',textField:'name',url:'customer/cusType'"/>
+	    			</td>
+	    		</tr>
 	    		<tr>
 	    			<td>姓名:</td>
 	    			<td>
@@ -40,7 +46,6 @@
 	    		</tr>
 	    	</table>
 	    </form>
-	    </div>
 	</div>
 </body>
 </html>

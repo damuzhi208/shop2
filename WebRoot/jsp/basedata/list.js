@@ -42,7 +42,7 @@ function typeFormatter(value,row,index){
  * @param index
  */
 function opFormatter(value,row,index){
-	return '<a href="javascript:void(0)" onclick="modBaseQj(\''+row.id+'\', \''+row.guige+'\', \''+row.type+'\')">修改</a>';
+	return '<a href="javascript:void(0)" class="easyui-editbtn" onclick="modBaseQj(\''+row.id+'\', \''+row.guige+'\', \''+row.type+'\')">修改</a>';
 }
 
 function modBaseQj(pId, guige, type){

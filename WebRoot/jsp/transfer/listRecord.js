@@ -24,6 +24,30 @@ function transTypeFormatter(value, row, index){
 }
 
 /**
+ * 进货价格formatter
+ * @param value
+ * @param row
+ * @param index
+ * @returns
+ */
+function costFormatter(value, row, index){
+	if(row.shopName == '合计') return ;
+	return value;
+}
+
+/**
+ * 交易价格formatter
+ * @param value
+ * @param row
+ * @param index
+ * @returns
+ */
+function salePriceFormatter(value, row, index){
+	if(row.shopName == '合计') return ;
+	return value;
+}
+
+/**
  * 规格formatter
  * @param value
  * @param row
@@ -54,6 +78,7 @@ function YMDDateFormatter(value,row,index){
  * @param index
  */
 function profitFormatter(value,row,index){
+	if(row.shopName == '合计') return ;
 	if(row.nums && row.cost && row.salePrice){
 		return parseFloat((Number(row.salePrice) - Number(row.cost)) * Number(row.nums)).toFixed(2);
 	}
@@ -65,7 +90,9 @@ function profitFormatter(value,row,index){
  * @param index
  */
 function opFormatter(value, row, index){
-	return '<a href="javascript:void(0)" onclick="modLine(\''+row.id+'\', \''+row.name+'\')">修改</a>';
+	if(row.shopName == '合计') return ;
+	return '<a href="javascript:void(0)" class="easyui-editbtn" onclick="modLine(\''+row.id+'\', \''+row.name+'\')">修改</a>'
+		+'<a href="javascript:void(0)" class="easyui-delbtn" onclick="delBtnClick(\''+row.id+'\')">删除</a>';
 }
 
 /**
@@ -81,7 +108,7 @@ function modLine(pId, name){
 	}
 	modelDialog = sy.iframeDialog({
 		"href" : url,
-		"height" : 300,
+		"height" : 340,
 		"width" : 600,
 		"title" : "【商品调动】修改",
 		"buttons": [
@@ -110,30 +137,26 @@ function modLine(pId, name){
 	return false;
 }
 
+/**
+ * 新增
+ */
 function addBtnClick(){
 	modLine(null, null);
 }
 
-function editBtnClick(){
-	var row = $("#datagrid").datagrid('getSelected');
-	if(!row){
-		showInfo({msg:''});
-		return;
-	}
-	top.openTab(row.infoName,basePath+'transfer/modPositive?id='+row.id);
-}
-function delBtnClick(){
-	var row = $("#datagrid").datagrid('getSelected');
-	if(!row){
-		showInfo({msg:'请选择记录'});
-		return;
-	}
-	showConfirm('提示','确定？',function(){
-		var url = basePath + 'singleTable/jsonDelete?entityClass=HrPositive&id='+row.id;
-		$.post(url,function(js){
-			showInfo({msg:js.msg});
-			if(js.success)
-				$("#datagrid").datagrid('deleteRow',$("#datagrid").datagrid('getRowIndex',row));
-		},'json');
+/**
+ * 删除
+ * @param id
+ */
+function delBtnClick(id){
+	$.messager.confirm("操作提示", "数据删除后无法恢复，确定删除？", function(data) {
+		if (data) {
+			$.post("transfer/delTransRecord?id="+id , function(js){ 
+				$.messager.alert('提示', js.msg);
+				if(js.success){
+					doSearch();
+				}
+			},'json');
+		}
 	});
 }

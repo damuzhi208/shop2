@@ -72,6 +72,10 @@ public class TBaseCustomerController extends BaseController{
 		return js.toString();
 	}
 	
+	/**
+	 * 顾客列表
+	 * @return
+	 */
 	@RequestMapping("select")
 	@ResponseBody
 	public String getSelectCustomer(){
@@ -79,4 +83,14 @@ public class TBaseCustomerController extends BaseController{
 		return JSONArray.fromObject(list).toString();
 	}
 	
+	/**
+	 * 顾客类别
+	 * @return
+	 */
+	@RequestMapping("cusType")
+	@ResponseBody
+	public String getSelectCusType(){
+		List<SelectVO> list = tBaseCustomerService.getCusType();
+		return JSONArray.fromObject(list).toString();
+	}
 }
