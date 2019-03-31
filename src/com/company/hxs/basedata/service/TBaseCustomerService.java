@@ -74,4 +74,16 @@ public class TBaseCustomerService extends BaseService{
 		list.add(vo2);
 		return list;
 	}
+
+	/**
+	 * É¾³ý¹Ë¿ÍÐÅÏ¢
+	 * @param id
+	 */
+	@Transactional
+	public void delCustomer(Integer id) {
+		TBaseCustomer customer = tBaseCustomerDao.get(TBaseCustomer.class, id);
+		if(customer != null){
+			tBaseCustomerDao.delete(customer);
+		}
+	}
 }

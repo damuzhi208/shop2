@@ -62,7 +62,7 @@ public class TBaseQiaoJiaService extends BaseService {
 		return Page.create(list, total);
 	}
 	
-	public TBaseQiaojia getTBaseQiaoJiaById(String id) {
+	public TBaseQiaojia getTBaseQiaoJiaById(Integer id) {
 		return tBaseQiaojiaDao.get(TBaseQiaojia.class, id);
 	}
 
@@ -74,6 +74,18 @@ public class TBaseQiaoJiaService extends BaseService {
 	public List<SelectVO> getQjSelect() {
 		String sql = "select cast(t.id as char) id,CONCAT('【',t.guige,'】厚度[',IFNULL(t.houdu,0),']系数[',IFNULL(t.xishu,0),']吨位价[',IFNULL(t.dwj,0),']单价[',IFNULL(t.danjia, 0),']') name from t_base_qiaojia t where t.type = 1";
 		return tBaseQiaojiaDao.findListBySqlAsAliasToBean2(sql, SelectVO.class);
+	}
+
+	/**
+	 * 删除桥架基础信息
+	 * @param id
+	 */
+	@Transactional
+	public void delBaseQj(Integer id) {
+		TBaseQiaojia bqj = tBaseQiaojiaDao.get(TBaseQiaojia.class, id);
+		if(bqj != null){
+			tBaseQiaojiaDao.delete(bqj);
+		}
 	}
 
 }

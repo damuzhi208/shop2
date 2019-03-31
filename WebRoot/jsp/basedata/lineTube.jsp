@@ -18,7 +18,7 @@
 		<div id="toolbar" style="height: 44px;padding:7px 2px">
 			规格：<input type="text" name="guige" />
 			软管/线管：<select name="mType" class="easyui-combobox" panelHeight="100" style="width: 172px;">
-						<option value="">==全部==</option>
+						<option value="">全部</option>
 						<option value="1">软管</option>
 						<option value="2">线管</option>
 					  </select>
@@ -45,8 +45,8 @@
 		    	</thead>
 		    	<thead>
 		    		<tr>
-		    			<th data-options="field:'danwei',align:'center',width:100">单位</th>
-		    			<th data-options="field:'danjia',align:'center',width:100">单价</th>
+		    			<th data-options="field:'danweiStr',align:'center',width:100">单位</th>
+		    			<th data-options="field:'danjia',align:'center',width:100,formatter:easyuiMoneyFormatter">单价</th>
 		    			<th data-options="field:'2',align:'center',width:100,formatter:opFormatter">操作</th>
 		    		</tr>
 		    	</thead>

@@ -19,6 +19,11 @@
 	    <form id="ff" method="post" action="customer/updateCustomer" >
 	    	<table cellpadding="5" align="center">
 	    		<tr>
+	    			<td>姓名:</td>
+	    			<td>
+	    				<input type="hidden" name="id" value="${customer.id }">
+	    				<input class="easyui-textbox" value="${customer.name }" id="name" type="text" name="name" data-options="required:true"></input>
+	    			</td>
 	    			<td>顾客类别:</td>
 	    			<td>
 	    				<input class="easyui-combobox" value="${customer.cusType }" type="text" name="unit" panelHeight="100"
@@ -26,23 +31,22 @@
 	    			</td>
 	    		</tr>
 	    		<tr>
-	    			<td>姓名:</td>
-	    			<td>
-	    				<input type="hidden" name="id" value="${customer.id }">
-	    				<input class="easyui-textbox" value="${customer.name }" id="name" type="text" name="name" data-options="required:true"></input>
+	    			<td>公司名称:</td>
+	    			<td colspan="3">
+	    				<input class="easyui-textbox" value="${customer.companyName }" type="text" name="companyName" style="width: 100%" data-options="required:true"/>
 	    			</td>
 	    		</tr>
 	    		<tr>
-	    			<td>公司名称:</td>
-	    			<td><input class="easyui-textbox" value="${customer.companyName }" type="text" name="companyName" data-options="required:true"></input></td>
-	    		</tr>
-	    		<tr>
 	    			<td>地址:</td>
-	    			<td><input class="easyui-textbox" value="${customer.address }" type="text" name="address" data-options="required:true"></input></td>
+	    			<td colspan="3" >
+	    				<input class="easyui-textbox" value="${customer.address }" type="text" name="address" style="width: 100%" data-options="required:true"/>
+	    			</td>
 	    		</tr>
 	    		<tr>
 	    			<td>联系电话:</td>
-	    			<td><input class="easyui-textbox" value="${customer.telephone }" type="text" name="telephone" data-options="required:true"></input></td>
+	    			<td colspan="3">
+	    				<input class="easyui-textbox" value="${customer.telephone }" type="text" name="telephone" style="width: 100%" data-options="required:true"/>
+	    			</td>
 	    		</tr>
 	    	</table>
 	    </form>

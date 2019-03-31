@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -17,6 +18,7 @@ import com.company.hxs.basedata.service.TBaseCustomerService;
 import com.company.hxs.common.Page;
 import com.company.hxs.common.controller.BaseController;
 import com.company.hxs.common.service.BaseService;
+import com.company.hxs.common.util.ResponseTool;
 import com.company.hxs.common.vo.SelectVO;
 
 @Controller
@@ -60,7 +62,7 @@ public class TBaseCustomerController extends BaseController{
 	 */
 	@RequestMapping("updateCustomer")
 	@ResponseBody
-	public String updateCustomer(TBaseCustomer customer){
+	public void updateCustomer(HttpServletResponse response, TBaseCustomer customer){
 		JSONObject js = new JSONObject();
 		try{
 			tBaseCustomerService.updateTBaseCustomer(customer);
@@ -69,7 +71,26 @@ public class TBaseCustomerController extends BaseController{
 			e.printStackTrace();
 			js = createResult(false, "³ö´í£º"+e.getMessage());
 		}
-		return js.toString();
+		ResponseTool.write(response, js);
+	}
+	
+	/**
+	 * É¾³ý¹Ë¿Í
+	 * @param response
+	 * @param id
+	 */
+	@RequestMapping("delCustomer")
+	@ResponseBody
+	public void delCustomer(HttpServletResponse response, Integer id){
+		JSONObject js = new JSONObject();
+		try{
+			tBaseCustomerService.delCustomer(id);
+			js = createResult(true, "É¾³ý³É¹¦");
+		}catch(Exception e){
+			e.printStackTrace();
+			js = createResult(false, "É¾³ýÊ§°Ü£º"+e.getMessage());
+		}
+		ResponseTool.write(response, js);
 	}
 	
 	/**

@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * 线管
@@ -32,7 +33,7 @@ public class TBaseLineTube {
 	/**
 	 * 单位
 	 */
-	private String danwei;
+	private Integer danwei;
 	
 	/**
 	 * 单价
@@ -44,6 +45,9 @@ public class TBaseLineTube {
 	 */
 	private Integer mType;
 
+	@Transient
+	private String danweiStr;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -60,11 +64,11 @@ public class TBaseLineTube {
 		this.guige = guige;
 	}
 
-	public String getDanwei() {
+	public Integer getDanwei() {
 		return danwei;
 	}
 
-	public void setDanwei(String danwei) {
+	public void setDanwei(Integer danwei) {
 		this.danwei = danwei;
 	}
 
@@ -82,6 +86,14 @@ public class TBaseLineTube {
 
 	public void setmType(Integer mType) {
 		this.mType = mType;
+	}
+
+	public String getDanweiStr() {
+		return danweiStr;
+	}
+
+	public void setDanweiStr(String danweiStr) {
+		this.danweiStr = danweiStr;
 	}
 	
 }

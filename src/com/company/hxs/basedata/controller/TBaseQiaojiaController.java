@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -17,6 +18,7 @@ import com.company.hxs.basedata.service.TBaseQiaoJiaService;
 import com.company.hxs.common.Page;
 import com.company.hxs.common.controller.BaseController;
 import com.company.hxs.common.service.BaseService;
+import com.company.hxs.common.util.ResponseTool;
 import com.company.hxs.common.vo.SelectVO;
 
 @Controller
@@ -53,15 +55,17 @@ public class TBaseQiaojiaController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping("modBaseQj")
-	public String modBaseQj(HttpServletRequest request, String id){
-		TBaseQiaojia qj = tBaseQiaoJiaService.getTBaseQiaoJiaById(id);
-		request.setAttribute("qj", qj);
+	public String modBaseQj(HttpServletRequest request, Integer id){
+		if(id != null){
+			TBaseQiaojia qj = tBaseQiaoJiaService.getTBaseQiaoJiaById(id);
+			request.setAttribute("qj", qj);
+		}
 		return "basedata/modBaseQj";
 	}
 	
 	@RequestMapping("updateBaseQj")
 	@ResponseBody
-	public String updateBaseQj(TBaseQiaojia qiaojia){
+	public void updateBaseQj(HttpServletResponse response, TBaseQiaojia qiaojia){
 		JSONObject js = new JSONObject();
 		try{
 			tBaseQiaoJiaService.updateTBaseQj(qiaojia);
@@ -70,7 +74,7 @@ public class TBaseQiaojiaController extends BaseController{
 			e.printStackTrace();
 			js = createResult(false, "´íÎóÐÅÏ¢£º" + e.getMessage());
 		}
-		return js.toString();
+		ResponseTool.write(response, js);
 	}
 	
 	/**
@@ -84,4 +88,22 @@ public class TBaseQiaojiaController extends BaseController{
 		return JSONArray.fromObject(list).toString();
 	}
 	
+	/**
+	 * É¾³ýÇÅ¼Ü
+	 * @param response
+	 * @param id
+	 */
+	@RequestMapping("delBaseQj")
+	@ResponseBody
+	public void delBaseQj(HttpServletResponse response, Integer id){
+		JSONObject js = new JSONObject();
+		try{
+			tBaseQiaoJiaService.delBaseQj(id);
+			js = createResult(true, "É¾³ý³É¹¦");
+		}catch(Exception e){
+			e.printStackTrace();
+			js = createResult(false, "É¾³ýÊ§°Ü£º" + e.getMessage());
+		}
+		ResponseTool.write(response, js);
+	}
 }

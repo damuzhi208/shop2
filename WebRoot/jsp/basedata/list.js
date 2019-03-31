@@ -42,16 +42,20 @@ function typeFormatter(value,row,index){
  * @param index
  */
 function opFormatter(value,row,index){
-	return '<a href="javascript:void(0)" class="easyui-editbtn" onclick="modBaseQj(\''+row.id+'\', \''+row.guige+'\', \''+row.type+'\')">修改</a>';
+	return '<a href="javascript:void(0)" class="easyui-editbtn" onclick="modBaseQj(\''+row.id+'\', \''+row.guige+'\', \''+row.type+'\')">修改</a>'
+		+'<a href="javascript:void(0)" class="easyui-delbtn" onclick="delBtnClick(\''+row.id+'\')">删除</a>';
 }
 
 function modBaseQj(pId, guige, type){
-	var title = (type == 1) ? "桥架" : "盖板"; 
+	var url = "baseqj/modBaseQj";
+	if(pId){
+		url += "?id="+pId;
+	}
 	modelDialog = sy.iframeDialog({
-		"href" : "baseqj/modBaseQj?id="+pId,
-		"height" : $('body', document).height() * 0.68,
-		"width" : $('body', document).width() * 0.4,
-		"title" : guige +'【' + title + '】修改',
+		"href" : url,
+		"height" : 320,
+		"width" : 630,
+		"title" : "【桥架/盖板】编辑",
 		"buttons": [
               {
             	  text : '确定',handler : function() {
@@ -79,29 +83,22 @@ function modBaseQj(pId, guige, type){
 }
 
 function addBtnClick(){
-	top.openTab('',basePath+'hr/modPositive');
+	modBaseQj(null, null, null);
 }
 
-function editBtnClick(){
-	var row = $("#datagrid").datagrid('getSelected');
-	if(!row){
-		showInfo({msg:''});
-		return;
-	}
-	top.openTab(row.infoName,basePath+'hr/modPositive?id='+row.id);
-}
-function delBtnClick(){
-	var row = $("#datagrid").datagrid('getSelected');
-	if(!row){
-		showInfo({msg:'��ѡ��һ����¼��'});
-		return;
-	}
-	showConfirm('ȷ��','ȷ��ɾ��ü�¼��',function(){
-		var url = basePath + 'singleTable/jsonDelete?entityClass=HrPositive&id='+row.id;
-		$.post(url,function(js){
-			showInfo({msg:js.msg});
-			if(js.success)
-				$("#datagrid").datagrid('deleteRow',$("#datagrid").datagrid('getRowIndex',row));
-		},'json');
+/**
+ * 刪除
+ * @param id
+ */
+function delBtnClick(id){
+	$.messager.confirm("操作提示", "数据删除后无法恢复，确定删除？", function(data) {
+		if (data) {
+			$.post("lineTube/delLineTube?id="+id , function(js){ 
+				$.messager.alert('提示', js.msg);
+				if(js.success){
+					doSearch();
+				}
+			},'json');
+		}
 	});
 }

@@ -2,6 +2,9 @@ package com.company.hxs.basedata.controller;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONObject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +15,7 @@ import com.company.hxs.basedata.service.TBaseLineTubeService;
 import com.company.hxs.common.Page;
 import com.company.hxs.common.controller.BaseController;
 import com.company.hxs.common.service.BaseService;
+import com.company.hxs.common.util.ResponseTool;
 
 @Controller
 @RequestMapping("lineTube")
@@ -42,7 +46,11 @@ public class TBaseLineTubeController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping("modLineTube")
-	public String modLineTube(HttpServletRequest request, String id){
+	public String modLineTube(HttpServletRequest request, Integer id){
+		if(id != null){
+			TBaseLineTube lineTube = tBaseLineTubeService.getLineTube(id);
+			request.setAttribute("line", lineTube);
+		}
 		return "basedata/modLineTube";
 	}
 	
@@ -53,8 +61,33 @@ public class TBaseLineTubeController extends BaseController{
 	 */
 	@RequestMapping("update")
 	@ResponseBody
-	public String update(TBaseLineTube lineTube){
-		return null;
+	public void update(HttpServletResponse response, TBaseLineTube lineTube){
+		JSONObject js = new JSONObject();
+		try{
+			tBaseLineTubeService.saveLineTube(lineTube);
+			js = createResult(true, "±£´æ³É¹¦");
+		}catch(Exception e){
+			js = createResult(false, "±£´æÊ§°Ü£º"+e.getMessage());
+		}
+		ResponseTool.write(response, js);
+	}
+	
+	/**
+	 * É¾³ýÈí¹Ü
+	 * @param response
+	 * @param id
+	 */
+	@RequestMapping("delLineTube")
+	@ResponseBody
+	public void delLineTube(HttpServletResponse response, Integer id){
+		JSONObject js = new JSONObject();
+		try{
+			tBaseLineTubeService.delLineTube(id);
+			js = createResult(true, "É¾³ý³É¹¦");
+		}catch(Exception e){
+			js = createResult(false, "É¾³ýÊ§°Ü£º"+e.getMessage());
+		}
+		ResponseTool.write(response, js);
 	}
 	
 }

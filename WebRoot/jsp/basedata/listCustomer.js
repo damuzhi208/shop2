@@ -28,7 +28,8 @@ function mTypeFormatter(value,row,index){
  * @param index
  */
 function opFormatter(value,row,index){
-	return '<a href="javascript:void(0)" class="easyui-editbtn" onclick="modCustomer(\''+row.id+'\', \''+row.name+'\')">修改</a>';
+	return '<a href="javascript:void(0)" class="easyui-editbtn" onclick="modCustomer(\''+row.id+'\', \''+row.name+'\')">修改</a>'
+		+'<a href="javascript:void(0)" class="easyui-delbtn" onclick="delBtnClick(\''+row.id+'\')">删除</a>';
 }
 
 function modCustomer(pId, name){
@@ -38,8 +39,8 @@ function modCustomer(pId, name){
 	}
 	modelDialog = sy.iframeDialog({
 		"href" : url,
-		"height" : $('body', document).height() * 0.5,
-		"width" : $('body', document).width() * 0.4,
+		"height" : 300,
+		"width" : 600,
 		"title" : '客户信息【' + name + '】 编辑',
 		"buttons": [
               {
@@ -71,26 +72,18 @@ function addBtnClick(){
 	modCustomer(null, "");
 }
 
-function editBtnClick(){
-	var row = $("#datagrid").datagrid('getSelected');
-	if(!row){
-		showInfo({msg:''});
-		return;
-	}
-	top.openTab(row.infoName,basePath+'hr/modPositive?id='+row.id);
-}
-function delBtnClick(){
-	var row = $("#datagrid").datagrid('getSelected');
-	if(!row){
-		showInfo({msg:'请选择'});
-		return;
-	}
-	showConfirm('提示','确定？',function(){
-		var url = basePath + 'singleTable/jsonDelete?entityClass=HrPositive&id='+row.id;
-		$.post(url,function(js){
-			showInfo({msg:js.msg});
-			if(js.success)
-				$("#datagrid").datagrid('deleteRow',$("#datagrid").datagrid('getRowIndex',row));
-		},'json');
+/**
+ * 删除
+ */
+function delBtnClick(id){
+	$.messager.confirm("操作提示", "数据删除后无法恢复，确定删除？", function(data) {
+		if (data) {
+			$.post("customer/delCustomer?id="+id , function(js){ 
+				$.messager.alert('提示', js.msg);
+				if(js.success){
+					doSearch();
+				}
+			},'json');
+		}
 	});
 }

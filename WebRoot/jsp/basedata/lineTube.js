@@ -28,16 +28,20 @@ function mTypeFormatter(value,row,index){
  * @param index
  */
 function opFormatter(value,row,index){
-	return '<a href="javascript:void(0)" class="easyui-editbtn" onclick="modLine(\''+row.id+'\', \''+row.guige+'\', \''+row.type+'\')">修改</a>';
+	return '<a href="javascript:void(0)" class="easyui-editbtn" onclick="modLine(\''+row.id+'\', \''+row.guige+'\', \''+row.type+'\')">修改</a>'
+		+'<a href="javascript:void(0)" class="easyui-delbtn" onclick="delBtnClick(\''+row.id+'\', \''+row.guige+'\', \''+row.type+'\')">删除</a>';
 }
 
 function modLine(pId, guige, type){
-	var title = (type == 1) ? "软管" : "线管"; 
+	var url = "lineTube/modLineTube";
+	if(pId){
+		url += "?id=" + pId;
+	}
 	modelDialog = sy.iframeDialog({
-		"href" : "baseqj/modLine?id="+pId,
-		"height" : $('body', document).height() * 0.68,
-		"width" : $('body', document).width() * 0.4,
-		"title" : guige +'【' + title + '】修改',
+		"href" : url,
+		"height" : 320,
+		"width" : 630,
+		"title" : '【线管/软管】编辑',
 		"buttons": [
               {
             	  text : '确定',handler : function() {
@@ -64,30 +68,26 @@ function modLine(pId, guige, type){
 	return false;
 }
 
+/**
+ * 新增软管/线管
+ */
 function addBtnClick(){
-	top.openTab('',basePath+'hr/modPositive');
+	modLine(null, null, null);
 }
 
-function editBtnClick(){
-	var row = $("#datagrid").datagrid('getSelected');
-	if(!row){
-		showInfo({msg:''});
-		return;
-	}
-	top.openTab(row.infoName,basePath+'hr/modPositive?id='+row.id);
-}
-function delBtnClick(){
-	var row = $("#datagrid").datagrid('getSelected');
-	if(!row){
-		showInfo({msg:'？？？？？？'});
-		return;
-	}
-	showConfirm('提示','确定删除吗？',function(){
-		var url = basePath + 'singleTable/jsonDelete?entityClass=HrPositive&id='+row.id;
-		$.post(url,function(js){
-			showInfo({msg:js.msg});
-			if(js.success)
-				$("#datagrid").datagrid('deleteRow',$("#datagrid").datagrid('getRowIndex',row));
-		},'json');
+/**
+ * 删除
+ * @param id
+ */
+function delBtnClick(id){
+	$.messager.confirm("操作提示", "数据删除后无法恢复，确定删除？", function(data) {
+		if (data) {
+			$.post("baseqj/delLineTube?id="+id , function(js){ 
+				$.messager.alert('提示', js.msg);
+				if(js.success){
+					doSearch();
+				}
+			},'json');
+		}
 	});
 }
