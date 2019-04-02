@@ -83,8 +83,8 @@ public class TBaseQiaojiaController extends BaseController{
 	 */
 	@RequestMapping("getQjSelect")
 	@ResponseBody
-	public String getQjSelect(){
-		List<SelectVO> list = tBaseQiaoJiaService.getQjSelect();
+	public String getQjSelect(Integer type, Integer mType){
+		List<SelectVO> list = tBaseQiaoJiaService.getQjSelect(type, mType);
 		return JSONArray.fromObject(list).toString();
 	}
 	

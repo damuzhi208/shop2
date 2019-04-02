@@ -1,3 +1,5 @@
+
+
 /**
  * 查询
  */
@@ -15,9 +17,17 @@ function doSearch(){
  * @param row
  * @param index
  */
+var typeJson = {'1':'喷塑','2':'镀锌'};
+var mJson = {'1':'桥架','2':'盖板'};
+function lxFormatter(value,row,index){
+	return typeJson[row.type] + mJson[row.mType];
+}
 function guigeFormatter(value,row,index){
-	var str = "【"+row.guige+"】厚度["+row.houdu+"]"+"系数["+row.xishu+"]"+"吨位价["+row.dwj+"]"+"单价["+row.danjia+"]";
-	return str;
+	if(row.mType == 2){
+		return "【高"+row.heights+"】厚度["+row.houdu+"]"+"系数["+row.xishu+"]"+"吨位价["+row.dwj+"]"+"单价["+row.danjia+"]";
+	}else{
+		return "【宽*高"+row.widths+"*"+row.heights+"】厚度["+row.houdu+"]"+"系数["+row.xishu+"]"+"吨位价["+row.dwj+"]"+"单价["+row.danjia+"]";
+	}
 }
 
 function YMDDateFormatter(value,row,index){
@@ -42,13 +52,15 @@ function opFormatter(value,row,index){
  * @returns {Boolean}
  */
 function modStockQj(pId, name){
-	var url = "stock/modstockQj";
+	var mType = $("#mType").val();
+	var type = $("#type").val();
+	var url = "stock/modstockQj?type="+type+"&mType="+mType;
 	if(pId){
-		url += "?id=" + pId;
+		url += "&id=" + pId;
 	}
 	modelDialog = sy.iframeDialog({
 		"href" : url,
-		"height" : 210,
+		"height" : 310,
 		"width" : 580,
 		"title" : "【入库编辑】",
 		"buttons": [

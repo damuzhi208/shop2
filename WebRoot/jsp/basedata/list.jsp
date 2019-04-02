@@ -50,10 +50,12 @@
 		    	</thead>
 		    	<thead>
 		    		<tr>
-		    			<th data-options="field:'guige',align:'left',width:300">规格</th>
+		    			<th data-options="field:'3',align:'left',width:200,formatter:guigeFormatter">规格</th>
+		    			<th data-options="field:'widths',align:'center',width:100">宽度</th>
+		    			<th data-options="field:'heights',align:'center',width:100">高度</th>
 		    			<th data-options="field:'houdu',align:'center',width:100,formatter:easyuiMoneyFormatter">厚度</th>
 		    			<th data-options="field:'xishu',align:'center',width:100,formatter:easyuiMoneyFormatter">系数</th>
-		    			<th data-options="field:'dwj',align:'center',width:100,formatter:easyuiMoneyFormatter">单位价</th>
+		    			<th data-options="field:'dwj',align:'center',width:100,formatter:easyuiMoneyFormatter">吨位价</th>
 		    			<th data-options="field:'danjia',align:'center',width:100,formatter:easyuiMoneyFormatter">单价</th>
 		    			<th data-options="field:'2',align:'center',width:100,formatter:opFormatter">操作</th>
 		    		</tr>

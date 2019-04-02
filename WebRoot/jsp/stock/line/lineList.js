@@ -15,10 +15,13 @@ function doSearch(){
  * @param row
  * @param index
  */
+var typeJson = {'1':'金属软管','2':'线管'};
+function lxFormatter(value, row, index){
+	return typeJson[value];
+}
 function guigeFormatter(value, row, index){
 	if(row.guige == '合计') return '合计';
-	var typeJson = {'1':'金属软管','2':'线管'};
-	return "【" + typeJson[row.mType] + "】【" + row.guige + "】单位[" + row.danweis + "]单价[" + row.danjia + "]";
+	return "【" + row.guige + "】单位[" + row.danweis + "]单价[" + row.danjia + "]";
 }
 
 /**

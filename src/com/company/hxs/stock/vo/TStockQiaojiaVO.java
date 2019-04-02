@@ -46,9 +46,14 @@ public class TStockQiaojiaVO {
 	private Integer mType;
 	
 	/**
-	 * 规格
+	 * 宽度
 	 */
-	private String guige;
+	private BigDecimal widths;
+	
+	/**
+	 * 高度
+	 */
+	private BigDecimal heights;
 	
 	/**
 	 * 厚度
@@ -127,14 +132,6 @@ public class TStockQiaojiaVO {
 		this.mType = mType;
 	}
 
-	public String getGuige() {
-		return guige;
-	}
-
-	public void setGuige(String guige) {
-		this.guige = guige;
-	}
-
 	public BigDecimal getHoudu() {
 		return houdu;
 	}
@@ -165,6 +162,22 @@ public class TStockQiaojiaVO {
 
 	public void setDanjia(BigDecimal danjia) {
 		this.danjia = danjia;
+	}
+
+	public BigDecimal getWidths() {
+		return widths;
+	}
+
+	public void setWidths(BigDecimal widths) {
+		this.widths = widths;
+	}
+
+	public BigDecimal getHeights() {
+		return heights;
+	}
+
+	public void setHeights(BigDecimal heights) {
+		this.heights = heights;
 	}
 	
 }

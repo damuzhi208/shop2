@@ -26,7 +26,7 @@
 	    			</td>
 	    			<td>顾客类别:</td>
 	    			<td>
-	    				<input class="easyui-combobox" value="${customer.cusType }" type="text" name="unit" panelHeight="100"
+	    				<input class="easyui-combobox" value="${customer.cusType }" type="text" name="cusType" panelHeight="100"
 	    				 data-options="required:true,valueField:'id',textField:'name',url:'customer/cusType'"/>
 	    			</td>
 	    		</tr>

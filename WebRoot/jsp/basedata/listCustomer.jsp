@@ -35,12 +35,13 @@
 				>
 				<thead data-options="frozen:true">
 		    		<tr>
+		    			<th data-options="field:'cusType',align:'center',width:100,formatter:cusTypeFormatter">顾客类别</th>
 		    			<th data-options="field:'name',align:'center',width:100">姓名</th>
-		    			<th data-options="field:'companyName',align:'center',width:260">公司名称</th>
 		    		</tr>
 		    	</thead>
 		    	<thead>
 		    		<tr>
+		    			<th data-options="field:'companyName',align:'center',width:260">公司名称</th>
 		    			<th data-options="field:'telephone',align:'center',width:120">联系电话</th>
 		    			<th data-options="field:'address',align:'center',width:200">公司地址</th>
 		    			<th data-options="field:'1',align:'center',width:100,formatter:opFormatter">操作</th>

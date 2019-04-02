@@ -26,7 +26,9 @@ public class TStockQiaojiaController extends BaseController{
 	@Resource private TStockQiaojiaService tStockQiaojiaService;
 	
 	@RequestMapping("stockQiaojiaList")
-	public String stockQiaojiaList(HttpServletRequest request){
+	public String stockQiaojiaList(HttpServletRequest request, Integer type, Integer mType){
+		request.setAttribute("type", type);
+		request.setAttribute("mType", mType);
 		return "stock/qiaojia/stockQiaojiaList";
 	}
 	
@@ -42,11 +44,13 @@ public class TStockQiaojiaController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping("modstockQj")
-	public String modstockQj(HttpServletRequest request, Integer id){
+	public String modstockQj(HttpServletRequest request, Integer id, Integer type, Integer mType){
 		if(id != null){
 			TStockQiaojia stock = tStockQiaojiaService.getTStockQj(id);
 			request.setAttribute("stock", stock);
 		}
+		request.setAttribute("type", type);
+		request.setAttribute("mType", mType);
 		return "stock/qiaojia/modStockQiaojia";
 	}
 	

@@ -6,8 +6,23 @@ function doSearch(){
 	$("#toolbar").find("input[name],select[name]").each(function(i){
 		params[this.name] = this.value;
 	});
-	console.log("params"+JSON.stringify(params));
 	$("#datagrid").datagrid('load',params);
+}
+
+/**
+ * 规格formatter
+ * @param value
+ * @param row
+ * @param index
+ */
+var mTJson1 = {'1':'喷塑桥架','2':'镀锌桥架'};
+var mTJson2 = {'1':'喷塑盖板','2':'镀锌盖板'};
+function guigeFormatter(value,row,index){
+	if(row.type == 1){
+		return mTJson1[row.mType] + '【' + row.widths + '*' + row.heights + '】';
+	}else if(row.type == 2){
+		return mTJson2[row.mType] + '【' + row.widths + '】';
+	}
 }
 
 /**
@@ -17,8 +32,8 @@ function doSearch(){
  * @param index
  */
 function mTypeFormatter(value,row,index){
-	if(row.mType==1) return '喷塑桥架';
-	if(row.mType==2) return '镀锌桥架';
+	if(row.mType==1) return '喷塑';
+	if(row.mType==2) return '镀锌';
 	return '其他';
 }
 
@@ -30,7 +45,7 @@ function mTypeFormatter(value,row,index){
  * @returns {String}
  */
 function typeFormatter(value,row,index){
-	if(row.type==1) return '桥架';
+	if(row.type==1) return '<span style="color:red">桥架</span>';
 	if(row.type==2) return '盖板';
 	return '其他';
 }

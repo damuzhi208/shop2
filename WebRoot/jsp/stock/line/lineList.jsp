@@ -17,12 +17,13 @@
 	<div class="easyui-layout" fit="true" style="border:none;">
 		<div id="toolbar" style="height: 44px;padding:7px 2px">
 			规格：<input type="text" name="guige" />
-			软管/线管：
+			<!-- 软管/线管：
 			<select class="easyui-combobox" panelHeight="100" style="width: 172px;" name="mType">
 				<option value="">全部</option>
 				<option value="1">软管</option>
 				<option value="2">线管</option>
-			</select>
+			</select> -->
+			<input type="hidden" name="mType" value="${mType }"/>
 			<span class="easyui-searchbtn" onclick="doSearch();">搜索</span>
 			<span class="easyui-addbtn" onclick="addBtnClick();">新增</span>
 		</div>  		
@@ -37,10 +38,11 @@
 						nowrap:false,
 						singleSelect:true,
 						pageList:[10,15,20,25,30,35,50,100],
-						url:'<%=basePath %>stockLine/lineData'"
+						url:'<%=basePath %>stockLine/lineData?mType=${mType }'"
 				>
 				<thead data-options="frozen:true">
 		    		<tr>
+		    			<th data-options="field:'mType',align:'center',width:100,formatter:lxFormatter">规格</th>
 		    			<th data-options="field:'guige',align:'left',width:380,formatter:guigeFormatter">规格</th>
 		    		</tr>
 		    	</thead>

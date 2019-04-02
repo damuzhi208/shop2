@@ -24,8 +24,8 @@
 				<option value="2">调出</option>
 			</select>
 <!-- 			<input class="easyui-combobox" type="text" name="transType" panelHeight="100" data-options="valueField:'id',textField:'name',url:'transfer/getTransType'"/> -->
-			<span class="easyui-addbtn" onclick="addBtnClick();">新增</span>
 			<span class="easyui-searchbtn" onclick="doSearch();">搜索</span>
+			<span class="easyui-addbtn" onclick="addBtnClick();">新增</span>
 		</div>  		
 		<div data-options="region:'center',border:false" style=" border:none">
 			<table id="datagrid" class="easyui-datagrid"  fit="true" 
@@ -48,13 +48,13 @@
 		    	</thead>
 		    	<thead>
 		    		<tr>
-		    			<th data-options="field:'transType',align:'center',width:100,formatter:transTypeFormatter">调动类型</th>
-		    			<th data-options="field:'shopName',align:'center',width:120">商品名称</th>
+		    			<th data-options="field:'shopName',align:'left',width:260">商品名称</th>
 		    			<th data-options="field:'nums',align:'center',width:100">调动数量</th>
 		    			<th data-options="field:'unitStr',align:'center',width:80">单位</th>
 		    			<th data-options="field:'cost',align:'center',width:100,formatter:costFormatter">成本价格</th>
 		    			<th data-options="field:'salePrice',align:'center',width:100,formatter:salePriceFormatter">成交价格</th>
-		    			<th data-options="field:'profit',align:'center',width:80">利润</th>
+		    			<th data-options="field:'profit',align:'center',width:160">利润<br>(成交价-成本价)*数量</th>
+		    			<th data-options="field:'transType',align:'center',width:100,formatter:transTypeFormatter">调动类型</th>
 		    			<th data-options="field:'transDate',align:'center',width:120,formatter:YMDDateFormatter">调动日期</th>
 		    			<th data-options="field:'createTime',align:'center',width:160">操作时间</th>
 		    			<th data-options="field:'2',align:'center',width:100,formatter:opFormatter">操作</th>

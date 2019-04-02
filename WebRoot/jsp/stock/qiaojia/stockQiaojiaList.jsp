@@ -16,7 +16,7 @@
 <body>
   <div class="easyui-layout" fit="true" style="border:none;">
 		<div id="toolbar" style="height: 44px;padding:7px 2px">
-			喷塑/镀锌：<select name="type" class="easyui-combobox" panelHeight="100" style="width: 172px;">
+			<!-- 喷塑/镀锌：<select name="type" class="easyui-combobox" panelHeight="100" style="width: 172px;">
 						<option value="">全部</option>
 						<option value="1">喷塑</option>
 						<option value="2">镀锌</option>
@@ -25,7 +25,12 @@
 						<option value="">全部</option>
 						<option value="1">桥架</option>
 						<option value="2">盖板</option>
-					</select>
+					</select> -->
+			规格：<input type="text" name="widths"/>
+			系数：<input type="text" name="xishu"/>
+			吨位价：<input type="text" name="dwj"/>
+			<input type="hidden" id="type" name="type" value="${type }"/>
+			<input type="hidden" id="mType" name="mType" value="${mType }"/>
 			<span class="easyui-searchbtn" onclick="doSearch();">搜索</span>
 			<span class="easyui-addbtn" onclick="addBtnClick();">新增</span>
 		</div>  		
@@ -39,16 +44,17 @@
 						nowrap:false,
 						singleSelect:true,
 						pageList:[10,15,20,25,30,35,50,100],
-						url:'<%=basePath %>stock/qiaojiaData'"
+						url:'<%=basePath %>stock/qiaojiaData?type=${type}&mType=${mType}'"
 				>
 				<thead data-options="frozen:true">
 		    		<tr>
-		    			<th data-options="field:'1',align:'center',width:400,formatter:guigeFormatter">规格</th>
-		    			<th data-options="field:'stockNum',align:'center',width:100">入库数量</th>
+		    			<th data-options="field:'0',align:'left',width:100,formatter:lxFormatter">类型</th>
+		    			<th data-options="field:'1',align:'left',width:600,formatter:guigeFormatter">规格</th>
 		    		</tr>
 		    	</thead>
 		    	<thead>
 		    		<tr>
+		    			<th data-options="field:'stockNum',align:'center',width:100">入库数量</th>
 		    			<th data-options="field:'transDate',align:'center',width:120,formatter:YMDDateFormatter">入库库日期</th>
 		    			<th data-options="field:'createTime',align:'center',width:160">操作时间</th>
 		    			<th data-options="field:'2',align:'center',width:100,formatter:opFormatter">操作</th>

@@ -12,7 +12,6 @@ import com.company.hxs.basedata.dao.TBaseQiaojiaDao;
 import com.company.hxs.basedata.entity.TBaseQiaojia;
 import com.company.hxs.common.Page;
 import com.company.hxs.common.service.BaseService;
-import com.company.hxs.common.util.CTools;
 import com.company.hxs.common.vo.SelectVO;
 
 @Service
@@ -24,10 +23,6 @@ public class TBaseQiaoJiaService extends BaseService {
 		StringBuffer hql = new StringBuffer("from TBaseQiaojia where 1 = 1 ");
 		List<Object> params = new ArrayList<Object>();
 		if(qiaojia != null){
-			if(CTools.isNotEmpty(qiaojia.getGuige())){
-				hql.append(" and guige like ? ");
-				params.add("%" + qiaojia.getGuige() + "%");
-			}
 			if(qiaojia.getmType() != null){
 				hql.append(" and mType = ? ");
 				params.add(qiaojia.getmType());
@@ -44,10 +39,6 @@ public class TBaseQiaoJiaService extends BaseService {
 		StringBuffer hql = new StringBuffer("from TBaseQiaojia where 1 = 1 ");
 		List<Object> params = new ArrayList<Object>();
 		if(qiaojia != null){
-			if(CTools.isNotEmpty(qiaojia.getGuige())){
-				hql.append(" and guige like ? ");
-				params.add("%" + qiaojia.getGuige() + "%");
-			}
 			if(qiaojia.getmType() != null){
 				hql.append(" and mType = ? ");
 				params.add(qiaojia.getmType());
@@ -71,9 +62,16 @@ public class TBaseQiaoJiaService extends BaseService {
 		tBaseQiaojiaDao.saveOrUpdate(qiaojia);
 	}
 
-	public List<SelectVO> getQjSelect() {
-		String sql = "select cast(t.id as char) id,CONCAT('【',t.guige,'】厚度[',IFNULL(t.houdu,0),']系数[',IFNULL(t.xishu,0),']吨位价[',IFNULL(t.dwj,0),']单价[',IFNULL(t.danjia, 0),']') name from t_base_qiaojia t where t.type = 1";
-		return tBaseQiaojiaDao.findListBySqlAsAliasToBean2(sql, SelectVO.class);
+	public List<SelectVO> getQjSelect(Integer type, Integer mType) {
+		StringBuffer sql = new StringBuffer("");
+		String mterial = mType == 1 ? "喷塑" : "镀锌";
+		if(type == 1){//桥架
+			sql.append("select cast(t.id as char) id,CONCAT('"+mterial+"','桥架【宽*高(',t.widths,'*',t.heights,')】厚度[',IFNULL(t.houdu,0),']系数[',IFNULL(t.xishu,0),']吨位价[',IFNULL(t.dwj,0),']单价[',IFNULL(t.danjia, 0),']') name from t_base_qiaojia t where 1 = 1");
+		}else if(type == 2){
+			sql.append("select cast(t.id as char) id,CONCAT('"+mterial+"','盖板【宽(',t.widths,')】厚度[',IFNULL(t.houdu,0),']系数[',IFNULL(t.xishu,0),']吨位价[',IFNULL(t.dwj,0),']单价[',IFNULL(t.danjia, 0),']') name from t_base_qiaojia t where 1 = 1");
+		}
+		sql.append(" and t.type = ? and t.mType = ?");
+		return tBaseQiaojiaDao.findListBySqlAsAliasToBean2(sql.toString(), SelectVO.class, new Object[]{type, mType});
 	}
 
 	/**

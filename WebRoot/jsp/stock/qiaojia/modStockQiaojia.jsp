@@ -21,8 +21,8 @@
 	    		<tr>
 	    			<td>桥架型号:</td>
 	    			<td colspan="3">
-	    				<input class="easyui-combobox" type="text" value="${stock.qiaojiaId }" name="qiaojiaId" panelHeight="100" style="width: 380px;"
-	    				 data-options="required:true,valueField:'id',textField:'name',url:'baseqj/getQjSelect'"/>
+	    				<input class="easyui-combobox" type="text" value="${stock.qiaojiaId }" name="qiaojiaId" panelHeight="180" style="width: 100%;"
+	    				 data-options="required:true,valueField:'id',textField:'name',url:'baseqj/getQjSelect?mType=${mType }&type=${type }'"/>
 	    			</td>
 	    		</tr>
 	    		<tr>

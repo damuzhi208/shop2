@@ -10,17 +10,19 @@ function doSearch(){
 }
 
 /**
- * 类型
+ * 顾客类别
  * @param value
  * @param row
  * @param index
  */
-function mTypeFormatter(value,row,index){
-	if(row.mType==1) return '1';
-	if(row.mType==2) return '2';
-	return '其他';
+function cusTypeFormatter(value,row,index){
+	if(value == 1){
+		return '顾客';
+	}else if(value == 2){
+		return '同行';
+	}
+	return '未知';
 }
-
 /**
  * 操作
  * @param value

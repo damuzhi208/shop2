@@ -20,9 +20,14 @@ public class TBaseQiaojia {
 	private Integer id;
 	
 	/**
-	 * 规格
+	 * 宽度
 	 */
-	private String guige;
+	private BigDecimal widths;
+	
+	/**
+	 * 高度
+	 */
+	private BigDecimal heights;
 	
 	/**
 	 * 厚度
@@ -60,14 +65,6 @@ public class TBaseQiaojia {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getGuige() {
-		return guige;
-	}
-
-	public void setGuige(String guige) {
-		this.guige = guige;
 	}
 
 	public BigDecimal getHoudu() {
@@ -116,6 +113,22 @@ public class TBaseQiaojia {
 
 	public void setmType(Integer mType) {
 		this.mType = mType;
+	}
+
+	public BigDecimal getWidths() {
+		return widths;
+	}
+
+	public void setWidths(BigDecimal widths) {
+		this.widths = widths;
+	}
+
+	public BigDecimal getHeights() {
+		return heights;
+	}
+
+	public void setHeights(BigDecimal heights) {
+		this.heights = heights;
 	}
 
 }

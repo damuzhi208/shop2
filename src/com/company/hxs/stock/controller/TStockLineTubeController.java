@@ -26,7 +26,8 @@ public class TStockLineTubeController extends BaseController{
 	@Resource private TStockLineTubeService tStockTubeService;
 	
 	@RequestMapping("lineList")
-	public String lineList(HttpServletRequest request){
+	public String lineList(HttpServletRequest request, Integer mType){
+		request.setAttribute("mType", mType);
 		return "stock/line/lineList";
 	}
 	
