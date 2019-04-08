@@ -5,6 +5,7 @@ import org.springframework.orm.hibernate4.HibernateOperations;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
+
+import com.company.hxs.common.Page;
 
 @Repository
 @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -125,4 +128,58 @@ public class SqlCommonDao extends HibernateTemplate implements ISqlCommonDao, Hi
 	      }
 	    });
 	}
+	
+	/**
+	 * sql查询返回分页bean
+	 * @param sql
+	 * @param c
+	 * @param pageNumber
+	 * @param pageSize
+	 * @return
+	 */
+	public <TB> Page<TB> sqlFindPage(final String sql, final Class<TB> c, Integer pageNumber, Integer pageSize){
+		return this.sqlFindPage(sql, c, null, pageNumber, pageSize);
+	}
+	
+	/**
+	 * sql查询返回分页bean
+	 * @param sql
+	 * @param c
+	 * @param params
+	 * @param pageNumber
+	 * @param pageSize
+	 * @return
+	 */
+	public <TB> Page<TB> sqlFindPage(final String sql, final Class<TB> c,final Object[] params, Integer pageNumber, Integer pageSize){
+		StringBuffer sb = new StringBuffer(sql);
+		int total = sqlGetCount("select count(*) from ("+sb.toString()+") o", params);
+		if (pageNumber == null || pageNumber < 1){
+			pageNumber = 1;
+		}
+		if (pageSize == null || pageSize < 1){
+			pageSize = 10;
+		}
+		if (total < 1) {
+			return new Page(new ArrayList<>(), pageNumber, pageSize, 0);
+		}
+		final int start = (pageNumber - 1) * pageSize;
+		final int count = start + pageSize;
+		List<TB> list = (List<TB>) this.hibernateTemplate.execute(new HibernateCallback() {
+			public List<Map<String, Object>> doInHibernate(final Session session) {
+				Query query = session.createSQLQuery(sql);
+				query.setFirstResult(start);
+				query.setMaxResults(count);
+				if (null != params) {
+					for (int i = 0; i < params.length; i++) {
+						query.setParameter(i, params[i]);
+					}
+				}
+				query.setResultTransformer(Transformers.aliasToBean(c));
+				return query.list();
+			}
+		});
+		Page page = new Page(list, pageNumber, pageSize, total);
+		return page;
+	}
+	
 }
