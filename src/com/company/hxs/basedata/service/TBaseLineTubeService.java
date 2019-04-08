@@ -62,11 +62,15 @@ public class TBaseLineTubeService extends BaseService{
 
 	/**
 	 * 查询下拉数据
+	 * @param mType 
 	 * @return
 	 */
-	public List<SelectVO> getSelectList() {
+	public List<SelectVO> getSelectList(Integer mType) {
 		String sql = "select cast(l.id as char) id,CONCAT('【',case when l.mType = '1' then '金属软管' when l.mType = '2' then '线管' else '未知' end,'】【',l.guige,'】单位[',b.`name`,']单价[',l.danjia,']') name "
 				+ " from t_base_linetube l,t_base_unit b where l.danwei = b.id";
+		if(mType != null){
+			sql += " and l.mType = " + mType;
+		}
 		return sqlCommonDao.findListBySqlAsAliasToBean2(sql, SelectVO.class);
 	}
 

@@ -13,5 +13,6 @@ public class SysConstant {
 	
 	public static String SYS_MENUS = "menus";
 	
+	public static String SYS_DATA = "data";
 	
 }

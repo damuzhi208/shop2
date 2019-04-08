@@ -114,4 +114,11 @@ public class TBaseCustomerController extends BaseController{
 		List<SelectVO> list = tBaseCustomerService.getCusType();
 		return JSONArray.fromObject(list).toString();
 	}
+	
+	@RequestMapping("getCustomer")
+	@ResponseBody
+	public String getCustomer(Integer id){
+		TBaseCustomer cus = tBaseCustomerService.getTBaseCustomer(id);
+		return JSONObject.fromObject(cus).toString();
+	}
 }

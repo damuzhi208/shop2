@@ -27,6 +27,13 @@ public class TBaseQiaojiaController extends BaseController{
 	
 	@Resource TBaseQiaoJiaService tBaseQiaoJiaService;
 	
+	@RequestMapping("getBaseQj")
+	@ResponseBody
+	public String getBaseQj(Integer id){
+		TBaseQiaojia qj = tBaseQiaoJiaService.getTBaseQiaoJiaById(id);
+		return JSONObject.fromObject(qj).toString();
+	}
+	
 	/**
 	 * «≈º‹¡–±Ì“≥√Ê
 	 * @return

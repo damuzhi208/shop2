@@ -6,17 +6,20 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class SqlCommonDao extends HibernateTemplate implements ISqlCommonDao, HibernateOperations{
 	
 	@Resource
@@ -55,7 +58,6 @@ public class SqlCommonDao extends HibernateTemplate implements ISqlCommonDao, Hi
 	    return findListBySqlAsAliasToBean2(sql, beanType, params, null, null);
 	}
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public <TB> List<TB> findListBySqlAsAliasToBean2(final String sql, final Class<TB> beanType, final Object[] params, final Integer page, final Integer size) {
 		return (List<TB>) this.hibernateTemplate.execute(new HibernateCallback() {
 			@Override  
@@ -74,5 +76,53 @@ public class SqlCommonDao extends HibernateTemplate implements ISqlCommonDao, Hi
                 return (List<TB>)query.list();  
             }  
        });
-	  }
+	}
+	
+	public Integer sqlGetCount(String sql, Object... params) {
+		List result = sqlFind(sql, params);
+		if ((!result.isEmpty()) && (result.get(0) != null)) {
+			this.logger.debug("result[0]:" + result.get(0));
+			return Integer.valueOf(result.get(0).toString());
+		}
+		this.logger.warn("result error!");
+
+		return Integer.valueOf(0);
+	}
+	
+	public List<?> sqlFind(String sql, Object... params) {
+		return sqlFind(sql, null, null, null, params);
+	}
+
+	public <T> List<T> sqlFind(String sql, Class<T> c, Object... params) {
+		return sqlFind(sql, c, null, null, params);
+	}
+
+	public <T> List<T> sqlFind(final String sql, final Class<T> c, final Integer page, final Integer pageSize, final Object... params) {
+	    this.logger.debug("sql:" + sql);
+	    this.logger.debug("page:" + page);
+	    this.logger.debug("pageSize:" + pageSize);
+	    this.logger.debug("params:" + params);
+	    return this.hibernateTemplate.execute(new HibernateCallback() {
+	    	public Object doInHibernate(Session session) throws HibernateException {
+	        SQLQuery query = session.createSQLQuery(sql);
+			if (null != params) {
+				for (int i = 0; i < params.length; i++) {
+					query.setParameter(i, params[i]);
+				}
+			}
+	        if ((page != null) && (pageSize != null) && (page.intValue() > 0) && (pageSize.intValue() > 0)) {
+				query.setFirstResult((page.intValue() - 1) * pageSize.intValue());
+				query.setMaxResults(pageSize.intValue());
+	        }
+	        if (c != null) {
+				if (c.isAssignableFrom(Map.class)) {
+					query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+				} else {
+					query.setResultTransformer(Transformers.aliasToBean(c));
+				}
+	        }
+	        return query.list();
+	      }
+	    });
+	}
 }

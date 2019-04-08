@@ -96,8 +96,21 @@ public class TBaseLineTubeController extends BaseController{
 	
 	@RequestMapping("select")
 	@ResponseBody
-	public String getSelect(){
-		List<SelectVO> voList = tBaseLineTubeService.getSelectList();
+	public String getSelect(Integer mType){
+		List<SelectVO> voList = tBaseLineTubeService.getSelectList(mType);
 		return JSONArray.fromObject(voList).toString();
 	}
+	
+	/**
+	 * 获取线管基础信息
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("getBaseLine")
+	@ResponseBody
+	public String getBaseLine(Integer id){
+		TBaseLineTube line = tBaseLineTubeService.getLineTube(id);
+		return JSONObject.fromObject(line).toString();
+	}
+	
 }

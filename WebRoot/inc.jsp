@@ -28,9 +28,4 @@ request.setAttribute("basePath", basePath);
 		return '0.00';
 	}
 </script>
-<script type="text/javascript">
-function showMsg(){
-	
-}
-</script>
 
