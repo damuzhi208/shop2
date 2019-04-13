@@ -13,17 +13,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.company.hxs.basedata.entity.TBaseCustomer;
 import com.company.hxs.basedata.entity.TBaseLineTube;
+import com.company.hxs.basedata.entity.TBaseQiaojia;
 import com.company.hxs.basedata.service.TBaseCustomerService;
 import com.company.hxs.basedata.service.TBaseLineTubeService;
+import com.company.hxs.basedata.service.TBaseQiaoJiaService;
 import com.company.hxs.common.Page;
 import com.company.hxs.common.controller.BaseController;
 import com.company.hxs.common.service.BaseService;
 import com.company.hxs.common.sys.SysConstant;
 import com.company.hxs.common.util.ResponseTool;
 import com.company.hxs.order.entity.TSysOrderLine;
+import com.company.hxs.order.entity.TSysOrderOther;
 import com.company.hxs.order.entity.TSysOrderQiaojia;
 import com.company.hxs.order.entity.TSysOrderRecord;
 import com.company.hxs.order.service.TSysOrderLineService;
+import com.company.hxs.order.service.TSysOrderOtherService;
 import com.company.hxs.order.service.TSysOrderQiaojiaService;
 import com.company.hxs.order.service.TSysOrderRecordService;
 
@@ -36,6 +40,8 @@ public class TSysOrderRecordController extends BaseController {
 	@Resource private TBaseCustomerService tBaseCustomerService;
 	@Resource private TSysOrderLineService tSysOrderLineService;
 	@Resource private TBaseLineTubeService tLineTubeService;
+	@Resource private TSysOrderOtherService tSysOrderOtherService;
+	@Resource private TBaseQiaoJiaService tBaseQiaoJiaService;
 	
 	/**
 	 * 订单管理
@@ -99,9 +105,13 @@ public class TSysOrderRecordController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("modQiaojia")
-	public String modQiaojia(HttpServletRequest request,TSysOrderQiaojia qj){
+	public String modQiaojia(HttpServletRequest request,Integer type, Integer mType, TSysOrderQiaojia qj){
 		if(qj.getId() != null){
 			qj = tSysOrderQiaojiaService.getOrderQj(qj.getId());
+			qj.setType(mType);
+			qj.setmType(mType);
+			TBaseQiaojia qiaojia = tBaseQiaoJiaService.getTBaseQiaoJiaById(qj.getBaseQjId());
+			qj.setDanjia(qiaojia.getDanjia());
 		}
 		request.setAttribute("qj", qj);
 		return "order/modQiaojia";
@@ -195,6 +205,59 @@ public class TSysOrderRecordController extends BaseController {
 	public String lineData(TSysOrderLine line, Integer page, Integer rows){
 		Page<TSysOrderLine> list = tSysOrderRecordService.getLinePageResult(line, page, rows);
 		return BaseService.List2Json4FullDate(list.getRows(), list.getFooter(), list.getTotal());
+	}
+	
+	/**
+	 * 其他订单
+	 * @return
+	 */
+	@RequestMapping("orderOther")
+	public String orderOther(HttpServletRequest request, Integer orderId){
+		request.setAttribute("orderId", orderId);
+		return "order/orderOther";
+	}
+	
+	/**
+	 * 其他订单数据
+	 * @return
+	 */
+	@RequestMapping("otherData")
+	@ResponseBody
+	public String otherData(HttpServletRequest request, TSysOrderOther other, Integer page, Integer rows){
+		Page<TSysOrderOther> result = tSysOrderOtherService.getPageResult(other, page, rows);
+		return BaseService.List2Json4FullDate(result.getRows(), result.getFooter(), result.getTotal());
+	}
+	
+	/**
+	 * 修改其他订单
+	 * @param request
+	 * @param other
+	 * @return
+	 */
+	@RequestMapping("modOther")
+	public String modOther(HttpServletRequest request, TSysOrderOther other){
+		if(other.getId() != null){
+			other = tSysOrderOtherService.getOther(other.getId());
+		}
+		request.setAttribute("other", other);
+		return "order/modOther";
+	}
+	
+	/**
+	 * 更新其他订单
+	 * @param response
+	 * @param other
+	 */
+	@RequestMapping("updateOther")
+	public void updateOther(HttpServletResponse response, TSysOrderOther other){
+		JSONObject js = new JSONObject();
+		try{
+			tSysOrderOtherService.updateOther(other);
+			js = createResult(true, "保存成功");
+		}catch(Exception e){
+			js = createResult(false, "保存失败："+e.getMessage());
+		}
+		ResponseTool.write(response, js);
 	}
 	
 }

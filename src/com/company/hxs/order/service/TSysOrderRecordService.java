@@ -30,9 +30,8 @@ public class TSysOrderRecordService extends BaseService {
 	 * @return
 	 */
 	public Page<TSysOrderRecord> getPageResult(TSysOrderRecord order, Integer page, Integer rows) {
-		StringBuffer sql = new StringBuffer("select t.orderId,b.`name` customerName,b.companyName,t.orderDate,t.opTime,sum((oq.salePrice - bq.danjia) * oq.orderNums) profit,");
-			sql.append(" sum(oq.orderNums*oq.salePrice) liushui from t_sys_order_record t,t_base_customer b,t_sys_order_qiaojia oq, t_base_qiaojia bq ");
-			sql.append(" where t.customerId = b.id and oq.orderId = t.orderId and oq.baseQjId = bq.id");
+		StringBuffer sql = new StringBuffer("select t.orderId, b.`name` customerName, b.companyName, t.orderDate, t.opTime,getLiushuiByOrderId(t.orderId) liushui,getProfitByOrderId(t.orderId) profit ");
+			sql.append(" from t_sys_order_record t ,t_base_customer b where t.customerId = b.id");
 		List<Object> params = new ArrayList<Object>();
 		if(order != null){
 			if(CTools.isNotEmpty(order.getCustomerName())){
