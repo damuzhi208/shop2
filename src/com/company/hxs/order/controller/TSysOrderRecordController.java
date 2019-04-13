@@ -313,4 +313,22 @@ public class TSysOrderRecordController extends BaseController {
 		}
 		ResponseTool.write(response, js);
 	}
+	
+	/**
+	 * É¾³ý
+	 * @param response
+	 * @param id
+	 */
+	@RequestMapping("delete")
+	@ResponseBody
+	public void deleteRecord(HttpServletResponse response, Integer id){
+		JSONObject js = new JSONObject();
+		try{
+			tSysOrderRecordService.delete(id);
+			js = createResult(true, "É¾³ý³É¹¦");
+		}catch(Exception e){
+			js = createResult(true, "É¾³ýÊ§°Ü£º"+e.getMessage());
+		}
+		ResponseTool.write(response, js);
+	}
 }

@@ -28,7 +28,20 @@ function orderDateFormatter(value, row, index){
 function opFormatter(value, row, index){
 	if(row.customerName == '合计' || row.customerName == '') return ;
 	return '<a href="javascript:void(0)" class="easyui-editbtn" onclick="modOrder(\''+row.orderId+'\')">修改</a>'
-		+'<a href="javascript:void(0)" class="easyui-delbtn" onclick="delBtnClick(\''+row.id+'\')">删除</a>';
+		+'<a href="javascript:void(0)" class="easyui-delbtn" onclick="delBtnClick(\''+row.orderId+'\')">删除</a>';
+}
+
+function delBtnClick(id){
+	$.messager.confirm("操作提示", "数据删除后无法恢复，确定删除？", function(data) {
+		if (data) {
+			$.post("order/delete?id="+id , function(js){ 
+				$.messager.alert('提示', js.msg);
+				if(js.success){
+					doSearch();
+				}
+			},'json');
+		}
+	});
 }
 
 function modOrder(orderId){

@@ -146,4 +146,16 @@ public class TSysOrderRecordService extends BaseService {
 		return Page.create(list, footer, total);
 	}
 
+	/**
+	 * „h³ý
+	 * @param id
+	 */
+	@Transactional
+	public void delete(Integer id) {
+		TSysOrderRecord record = tSysOrderRecordDao.get(TSysOrderRecord.class, id);
+		if(record != null){
+			tSysOrderRecordDao.delete(record);
+		}
+	}
+
 }
