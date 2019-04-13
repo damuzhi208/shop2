@@ -30,7 +30,7 @@ public class TSysOrderRecordService extends BaseService {
 	 * @return
 	 */
 	public Page<TSysOrderRecord> getPageResult(TSysOrderRecord order, Integer page, Integer rows) {
-		StringBuffer sql = new StringBuffer("select t.orderId, b.`name` customerName, b.companyName, t.orderDate, t.opTime,getLiushuiByOrderId(t.orderId) liushui,getProfitByOrderId(t.orderId) profit ");
+		StringBuffer sql = new StringBuffer("select t.orderId, b.`name` customerName, b.companyName, t.orderDate,b.telephone, t.opTime,getLiushuiByOrderId(t.orderId) liushui,getProfitByOrderId(t.orderId) profit ");
 			sql.append(" from t_sys_order_record t ,t_base_customer b where t.customerId = b.id");
 		List<Object> params = new ArrayList<Object>();
 		if(order != null){
@@ -45,6 +45,10 @@ public class TSysOrderRecordService extends BaseService {
 			if(order.getEndDate() != null){
 				sql.append(" and t.orderDate <= ?");
 				params.add(order.getEndDate());
+			}
+			if(CTools.isNotEmpty(order.getTelephone())){
+				sql.append(" and b.telephone like ?");
+				params.add("%" + order.getTelephone() + "%");
 			}
 		}
 		List<TSysOrderRecord> list = sqlCommonDao.findListBySqlAsAliasToBean2(sql.toString(), TSysOrderRecord.class, params.toArray(), page, rows);

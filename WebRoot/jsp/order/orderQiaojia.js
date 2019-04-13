@@ -37,6 +37,19 @@ function opFormatter(value, row, index){
 		+'<a href="javascript:void(0)" class="easyui-delbtn" onclick="delBtnClick(\''+row.id+'\')">删除</a>';
 }
 
+function delBtnClick(id){
+	$.messager.confirm("操作提示", "数据删除后无法恢复，确定删除？", function(data) {
+		if (data) {
+			$.post("order/deleteQj?id="+id , function(js){ 
+				$.messager.alert('提示', js.msg);
+				if(js.success){
+					doSearch();
+				}
+			},'json');
+		}
+	});
+}
+
 function addBtnQj(type, mType, id){
 	var orderId = parent.isSaved();
 	if(!orderId){

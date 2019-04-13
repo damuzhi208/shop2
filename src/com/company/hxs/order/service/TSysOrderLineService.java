@@ -32,4 +32,16 @@ public class TSysOrderLineService extends BaseService{
 		tsysSysOrderLineDao.saveOrUpdate(line);
 	}
 
+	/**
+	 * É¾³ý
+	 * @param id
+	 */
+	@Transactional
+	public void delete(Integer id) {
+		TSysOrderLine line = tsysSysOrderLineDao.get(TSysOrderLine.class, id);
+		if(line != null){
+			tsysSysOrderLineDao.delete(line);
+		}
+	}
+
 }

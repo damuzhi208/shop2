@@ -260,4 +260,57 @@ public class TSysOrderRecordController extends BaseController {
 		ResponseTool.write(response, js);
 	}
 	
+	/**
+	 * É¾³ýÇÅ¼Ü
+	 * @param response
+	 * @param id
+	 */
+	@RequestMapping("deleteQj")
+	@ResponseBody
+	public void deleteQj(HttpServletResponse response, Integer id){
+		JSONObject js = new JSONObject();
+		try{
+			tSysOrderQiaojiaService.delete(id);
+			js = createResult(true, "É¾³ý³É¹¦");
+		}catch(Exception e){
+			js = createResult(true, "É¾³ýÊ§°Ü£º"+e.getMessage());
+		}
+		ResponseTool.write(response, js);
+	}
+	
+	/**
+	 * É¾³ýÏß¹Ü
+	 * @param response
+	 * @param id
+	 */
+	@RequestMapping("deleteLine")
+	@ResponseBody
+	public void deleteLine(HttpServletResponse response, Integer id){
+		JSONObject js = new JSONObject();
+		try{
+			tSysOrderLineService.delete(id);
+			js = createResult(true, "É¾³ý³É¹¦");
+		}catch(Exception e){
+			js = createResult(true, "É¾³ýÊ§°Ü£º"+e.getMessage());
+		}
+		ResponseTool.write(response, js);
+	}
+	
+	/**
+	 * É¾³ýÆäËû
+	 * @param response
+	 * @param id
+	 */
+	@RequestMapping("deleteOther")
+	@ResponseBody
+	public void deleteOther(HttpServletResponse response, Integer id){
+		JSONObject js = new JSONObject();
+		try{
+			tSysOrderOtherService.delete(id);
+			js = createResult(true, "É¾³ý³É¹¦");
+		}catch(Exception e){
+			js = createResult(true, "É¾³ýÊ§°Ü£º"+e.getMessage());
+		}
+		ResponseTool.write(response, js);
+	}
 }

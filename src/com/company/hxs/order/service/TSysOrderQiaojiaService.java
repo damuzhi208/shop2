@@ -32,4 +32,16 @@ public class TSysOrderQiaojiaService extends BaseService{
 		return tOrderQiaojiaDao.get(TSysOrderQiaojia.class, id);
 	}
 
+	/**
+	 * É¾³ý
+	 * @param id
+	 */
+	@Transactional
+	public void delete(Integer id) {
+		TSysOrderQiaojia qj = tOrderQiaojiaDao.get(TSysOrderQiaojia.class, id);
+		if(qj != null){
+			tOrderQiaojiaDao.delete(qj);
+		}
+	}
+
 }

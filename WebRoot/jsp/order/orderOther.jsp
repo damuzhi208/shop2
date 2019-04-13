@@ -39,7 +39,7 @@
 		    	</thead>
 		    	<thead>
 		    		<tr>
-		    			<th data-options="field:'costPrice',align:'center',width:100">成本价格</th>
+		    			<th data-options="field:'costPrice',align:'center',width:100,formatter:easyuiMoneyFormatter1">成本价格</th>
 		    			<th data-options="field:'salePrice',align:'center',width:100,formatter:easyuiMoneyFormatter1">成交价格</th>
 		    			<th data-options="field:'orderNums',align:'center',width:100,formatter:easyuiMoneyFormatter1">订单数量</th>
 		    			<th data-options="field:'liushui',align:'center',width:100,formatter:easyuiMoneyFormatter">流水金额</th>

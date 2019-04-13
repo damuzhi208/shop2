@@ -58,4 +58,16 @@ public class TSysOrderOtherService extends BaseService{
 	public void updateOther(TSysOrderOther other){
 		tSysOrderOtherDao.saveOrUpdate(other);
 	}
+
+	/**
+	 * É¾³ý
+	 * @param id
+	 */
+	@Transactional
+	public void delete(Integer id) {
+		TSysOrderOther other = tSysOrderOtherDao.get(TSysOrderOther.class, id);
+		if(other != null){
+			tSysOrderOtherDao.delete(other);
+		}
+	}
 }

@@ -84,6 +84,12 @@ public class TSysOrderRecord {
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date endDate;
 	
+	/**
+	 * µç»°ºÅÂë
+	 */
+	@Transient
+	private String telephone;
+	
 	public Integer getOrderId() {
 		return orderId;
 	}
@@ -162,6 +168,14 @@ public class TSysOrderRecord {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
 	}
 	
 }

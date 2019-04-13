@@ -16,6 +16,7 @@
 	<div class="easyui-layout" fit="true" style="border:none;">
 		<div id="toolbar" style="height: 44px;padding:7px 2px">
 			客户：<input type="text" name="customerName" />
+			电话号码：<input type="text" name="telephone" />
 			订单开始日期：<input  class="easyui-datebox" id="beginDate" type="text" name="beginDate" />
 			结束日期：<input  class="easyui-datebox" id="endDate" type="text" name="endDate" />
 			<span class="easyui-searchbtn" onclick="doSearch();">搜索</span>
@@ -42,6 +43,7 @@
 		    	</thead>
 		    	<thead>
 		    		<tr>
+		    			<th data-options="field:'telephone',align:'center',width:120">电话号码</th>
 		    			<th data-options="field:'liushui',align:'center',width:160,formatter:easyuiMoneyFormatter">流水额</th>
 		    			<th data-options="field:'profit',align:'center',width:160,formatter:easyuiMoneyFormatter">订单利润</th>
 		    			<th data-options="field:'orderDate',align:'center',width:160,formatter:orderDateFormatter">订单时间</th>
