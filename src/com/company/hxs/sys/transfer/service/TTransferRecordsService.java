@@ -42,6 +42,10 @@ public class TTransferRecordsService extends BaseService{
 				sql.append(" and r.transType = ?");
 				params.add(vo.getTransType());
 			}
+			if(CTools.isNotEmpty(vo.getTelephone())){
+				sql.append(" and c.telephone like ?");
+				params.add("%" + vo.getTelephone() + "%");
+			}
 		}
 		List<TTransferRecordsVO> voList = sqlCommonDao.findListBySqlAsAliasToBean2(sql.toString(), TTransferRecordsVO.class, params.toArray(), page, rows);
 		

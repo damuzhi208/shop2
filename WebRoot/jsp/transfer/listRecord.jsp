@@ -17,6 +17,7 @@
   <div class="easyui-layout" fit="true" style="border:none;">
 		<div id="toolbar" style="height: 44px;padding:7px 2px">
 			客户：<input type="text" name="customerName" />
+			电话号码：<input type="text" name="telephone" />
 			调动类型：
 			<select class="easyui-combobox" panelHeight="100" style="width: 172px;" name="transType">
 				<option value="">全部</option>
@@ -48,6 +49,7 @@
 		    	</thead>
 		    	<thead>
 		    		<tr>
+		    			<th data-options="field:'telephone',align:'left',width:120">电话号码</th>
 		    			<th data-options="field:'shopName',align:'left',width:260">商品名称</th>
 		    			<th data-options="field:'nums',align:'center',width:100">调动数量</th>
 		    			<th data-options="field:'unitStr',align:'center',width:80">单位</th>

@@ -109,7 +109,7 @@ function modLine(pId, name){
 	modelDialog = sy.iframeDialog({
 		"href" : url,
 		"height" : 340,
-		"width" : 600,
+		"width" : 620,
 		"title" : "【商品调动】修改",
 		"buttons": [
               {
