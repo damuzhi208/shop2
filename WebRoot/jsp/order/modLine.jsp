@@ -26,7 +26,7 @@
 	    		<tr>
 	    			<td>成本价:</td>
 	    			<td>
-	    				<input class="easyui-numberbox" type="text" value="${tube.danjia }" id="danjia" data-options="required:true,min:0,precision:2"/>
+	    				<input class="easyui-numberbox" type="text" name="danjia" value="${tube.danjia }" id="danjia" data-options="required:true,min:0,precision:2"/>
 	    			</td>
 	    			<td>数量:</td>
 	    			<td><input class="easyui-numberbox" value="${line.orderNums }" type="text" id="orderNums" name="orderNums" data-options="required:true,min:0,precision:2,onChange:changeProfit"/></td>

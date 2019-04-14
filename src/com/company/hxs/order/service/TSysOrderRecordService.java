@@ -88,7 +88,7 @@ public class TSysOrderRecordService extends BaseService {
 	 * @return
 	 */
 	public Page<TSysOrderQiaojia> getPageResult(TSysOrderQiaojia orderQj, Integer page, Integer rows) {
-		StringBuffer sql = new StringBuffer("select t.id,q.widths,q.heights,q.type,q.mType,q.danjia,q.houdu,q.xishu,q.dwj,t.orderNums,t.salePrice,(t.orderNums*t.salePrice) liushui,t.profit from t_sys_order_qiaojia t,t_base_qiaojia q where t.baseQjId = q.id");
+		StringBuffer sql = new StringBuffer("select t.id,q.widths,q.heights,q.type,q.mType,t.danjia,t.houdu,t.xishu,t.dwj,t.orderNums,t.salePrice,(t.orderNums*t.salePrice) liushui,t.profit from t_sys_order_qiaojia t,t_base_qiaojia q where t.baseQjId = q.id");
 		List<Object> params = new ArrayList<Object>();
 		if(orderQj != null){
 			if(orderQj.getOrderId() != null){
@@ -123,7 +123,7 @@ public class TSysOrderRecordService extends BaseService {
 	 * @return
 	 */
 	public Page<TSysOrderLine> getLinePageResult(TSysOrderLine line, Integer page, Integer rows) {
-		StringBuffer sql = new StringBuffer("select b.guige,b.danjia,b.mType,u.`name` danweis,o.id,o.orderNums,o.salePrice,o.profit,o.orderId,(o.orderNums*o.salePrice) liushui ");
+		StringBuffer sql = new StringBuffer("select b.guige,o.danjia,b.mType,u.`name` danweis,o.id,o.orderNums,o.salePrice,o.profit,o.orderId,(o.orderNums*o.salePrice) liushui ");
 			sql.append("from t_sys_order_line o,t_base_linetube b,t_base_unit u where o.baseLineId = b.id and b.danwei = u.id");
 		List<Object> params = new ArrayList<Object>();
 		if(line != null){

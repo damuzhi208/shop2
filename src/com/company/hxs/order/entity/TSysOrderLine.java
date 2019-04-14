@@ -59,7 +59,6 @@ public class TSysOrderLine {
 	/**
 	 * µ¥¼Û
 	 */
-	@Transient
 	private BigDecimal danjia;
 	
 	/**

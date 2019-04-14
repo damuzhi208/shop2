@@ -26,7 +26,10 @@
 	    		<tr>
 	    			<td>成本价:</td>
 	    			<td>
-	    				<input class="easyui-numberbox" type="text" id="danjia" value="${qj.danjia }" data-options="required:true,min:0,precision:2"/>
+	    				<input class="easyui-numberbox" type="text" name="danjia" id="danjia" value="${qj.danjia }" data-options="required:true,min:0,precision:2"/>
+	    				<input class="easyui-numberbox" type="hidden" name="houdu" id="houdu" value="${qj.houdu }"/>
+	    				<input class="easyui-numberbox" type="hidden" name="xishu" id="xishu" value="${qj.xishu }"/>
+	    				<input class="easyui-numberbox" type="hidden" name="dwj" id="dwj" value="${qj.dwj }"/>
 	    			</td>
 	    			<td>数量:</td>
 	    			<td><input class="easyui-numberbox" value="${qj.orderNums }" type="text" id="orderNums" name="orderNums" data-options="required:true,min:0,precision:2,onChange:changeProfit"/></td>
@@ -57,6 +60,9 @@
 			dataType : "json",
 			success : function(data){
 				$("#danjia").textbox('setValue',data.danjia);
+				$("#houdu").textbox('setValue',data.houdu);
+				$("#xishu").textbox('setValue',data.xishu);
+				$("#dwj").textbox('setValue',data.dwj);
 			}
 		});
 	}

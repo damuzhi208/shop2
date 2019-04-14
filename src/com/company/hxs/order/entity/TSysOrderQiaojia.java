@@ -83,25 +83,21 @@ public class TSysOrderQiaojia {
 	/**
 	 * 单价
 	 */
-	@Transient
 	private BigDecimal danjia;
 	
 	/**
 	 * 厚度
 	 */
-	@Transient
 	private BigDecimal houdu;
 	
 	/**
 	 * 系数
 	 */
-	@Transient
 	private BigDecimal xishu;
 	
 	/**
 	 * 吨位价
 	 */
-	@Transient
 	private BigDecimal dwj;
 	
 	public Integer getId() {
