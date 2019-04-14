@@ -50,6 +50,9 @@
 		</form>
 	</div>
 	<div id="tt" class="easyui-tabs" style="width:98%;height:78%;">
+        <div title="其他" data-options="closable:false" style="padding:20px;display:none;">
+    		<iframe scrolling='auto' frameborder='0' src='order/orderOther?orderId=${record.orderId }' style='width:100%;height:98%;'></iframe>
+        </div>
         <div title="喷塑桥架" style="padding:20px;display:none;">
     		<iframe scrolling='auto' frameborder='0' src='order/orderQiaojia?type=1&mType=1&orderId=${record.orderId }' style='width:100%;height:98%;'></iframe>
         </div>
@@ -67,9 +70,6 @@
         </div>
         <div title="线管" data-options="closable:false" style="padding:20px;display:none;">
     		<iframe scrolling='auto' frameborder='0' src='order/orderLine?mType=2&orderId=${record.orderId }' style='width:100%;height:98%;'></iframe>
-        </div>
-        <div title="其他" data-options="closable:false" style="padding:20px;display:none;">
-    		<iframe scrolling='auto' frameborder='0' src='order/orderOther?orderId=${record.orderId }' style='width:100%;height:98%;'></iframe>
         </div>
     </div>
 </body>

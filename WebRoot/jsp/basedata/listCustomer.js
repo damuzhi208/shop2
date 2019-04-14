@@ -42,7 +42,7 @@ function modCustomer(pId, name){
 	modelDialog = sy.iframeDialog({
 		"href" : url,
 		"height" : 300,
-		"width" : 600,
+		"width" : 640,
 		"title" : '客户信息【' + name + '】 编辑',
 		"buttons": [
               {

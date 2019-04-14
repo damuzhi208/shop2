@@ -74,13 +74,14 @@ toLoginPage(window);
 			return false;
 		}
 
-		$.post('/ajax/editpassword.ashx?newpass=' + $newpass.val(), function(
-				msg) {
-			msgShow('系统提示', '恭喜，密码修改成功！<br>您的新密码为：' + msg, 'info');
-			$newpass.val('');
-			$rePass.val('');
-			close();
-		});
+		$.post('/updatePass?passWord=' + $newpass.val()+'&id=${currentUser.id }', function(msg) {
+			msgShow('系统提示', '恭喜，密码修改成功！<br>您的新密码为：' + msg.data, 'info');
+			//$newpass.val('');
+			//$rePass.val('');
+			if(msg.success){
+				$('#w').window('close');
+			}
+		},'json');
 
 	}
 
@@ -135,8 +136,7 @@ toLoginPage(window);
 			<div title="欢迎使用" style="padding:20px;overflow:hidden; color:red; ">
 				<h1 style="font-size:24px;">* 作者：猪肉炖粉条 QQ：735173617</h1>
 				<h1 style="font-size:24px;">
-					* BLOG: <a style="font-size:24px;color:green;"
-						href="http://www.mycodes.net">猪肉炖粉条的博客</a>
+					* BLOG: <a style="font-size:24px;color:green;" href="javascript:void(0)">猪肉炖粉条的博客</a>
 				</h1>
 				<!-- <h1 style="font-size:24px;">*
 					讨论群：112044258、32994605、36534121、56271061</h1>

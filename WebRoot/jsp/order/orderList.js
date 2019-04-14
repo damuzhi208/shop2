@@ -27,7 +27,8 @@ function orderDateFormatter(value, row, index){
  */
 function opFormatter(value, row, index){
 	if(row.customerName == '合计' || row.customerName == '') return ;
-	return '<a href="javascript:void(0)" class="easyui-editbtn" onclick="modOrder(\''+row.orderId+'\')">修改</a>'
+	return '<a href="javascript:void(0)" class="easyui-editbtn" onclick="modOrder(\''+row.orderId+'\',\''+row.customerName+'\')">修改</a>'
+	    +'<a href="javascript:void(0)" class="easyui-viewbtn" onclick="viewRecord(\''+row.customerId+'\')">查看交易记录</a>'
 		+'<a href="javascript:void(0)" class="easyui-delbtn" onclick="delBtnClick(\''+row.orderId+'\')">删除</a>';
 }
 
@@ -44,9 +45,28 @@ function delBtnClick(id){
 	});
 }
 
-function modOrder(orderId){
+function viewRecord(customerId){
+	var url = "order/viewRecord?customerId="+customerId;
+	modelDialog = sy.iframeDialog({
+		"href" : url,
+		"height" : '85%',
+		"width" : '95%',
+		"title" : "查看交易记录",
+		"buttons": [
+             {
+            	  text: '取消', handler: function() {
+            		  modelDialog.dialog('destroy');
+                	  $("#datagrid").datagrid('reload');
+            	  }
+              }
+        ]
+	});
+	return false;
+}
+
+function modOrder(orderId,customerName){
 	top.$('#tabs').tabs("add", {
-        title: '修改订单',
+        title: '修改【'+customerName+'】订单',
         closable: true,
         content: "<iframe scrolling='auto' frameborder='0' src='order/orderTabs?orderId="+orderId+"' style='width:100%;height:98%;'></iframe>"
     });

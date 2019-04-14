@@ -33,7 +33,7 @@
 				>
 				<thead data-options="frozen:true">
 		    		<tr>
-		    			<th data-options="field:'guige',align:'left',width:360">线管规格</th>
+		    			<th data-options="field:'guige',align:'left',width:360">商品名称</th>
 		    			<th data-options="field:'danweis',align:'center',width:100">单位</th>
 		    		</tr>
 		    	</thead>

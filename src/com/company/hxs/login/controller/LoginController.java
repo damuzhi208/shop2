@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONArray;
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.company.hxs.common.controller.BaseController;
 import com.company.hxs.common.sys.SysConstant;
+import com.company.hxs.common.util.ResponseTool;
 import com.company.hxs.login.entity.TSysUser;
 import com.company.hxs.login.service.LoginService;
+import com.company.hxs.login.service.TSysUserService;
 import com.company.hxs.sys.menu.service.TSysMenuService;
 import com.company.hxs.sys.menu.vo.TSysMenuVO;
 
@@ -33,6 +36,8 @@ public class LoginController extends BaseController{
 	@Resource private LoginService loginService;
 	
 	@Resource private TSysMenuService tSysMenuService;
+	
+	@Resource private TSysUserService tSysUserService;
 	
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String loginGet(HttpServletRequest request){
@@ -65,6 +70,25 @@ public class LoginController extends BaseController{
 	@RequestMapping("index")
 	public String index(HttpServletRequest request){
 		return "index";
+	}
+	
+	/**
+	 * 修改密码
+	 * @param response
+	 * @param user
+	 */
+	@RequestMapping("updatePass")
+	@ResponseBody
+	public void updatePass(HttpServletResponse response, TSysUser user){
+		JSONObject js = new JSONObject();
+		try{
+			tSysUserService.updatePass(user);
+			js = createResult(true, "修改成功");
+			js.put(SysConstant.SYS_DATA, user.getPassWord());
+		}catch(Exception e){
+			js = createResult(false, "修改失败：" + e.getMessage());
+		}
+		ResponseTool.write(response, js);
 	}
 	
 }

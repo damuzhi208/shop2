@@ -48,7 +48,7 @@
 		    			<th data-options="field:'profit',align:'center',width:160,formatter:easyuiMoneyFormatter">订单利润</th>
 		    			<th data-options="field:'orderDate',align:'center',width:160,formatter:orderDateFormatter">订单时间</th>
 		    			<th data-options="field:'opTime',align:'center',width:160">操作时间</th>
-		    			<th data-options="field:'2',align:'center',width:100,formatter:opFormatter">操作</th>
+		    			<th data-options="field:'2',align:'center',width:260,formatter:opFormatter">操作</th>
 		    		</tr>
 		    	</thead>
 			</table>

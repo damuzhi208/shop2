@@ -33,19 +33,19 @@
 	    		<tr>
 	    			<td>公司名称:</td>
 	    			<td colspan="3">
-	    				<input class="easyui-textbox" value="${customer.companyName }" type="text" name="companyName" style="width: 100%" data-options="required:true"/>
+	    				<input class="easyui-textbox" value="${customer.companyName }" type="text" name="companyName" style="width: 100%"/>
 	    			</td>
 	    		</tr>
 	    		<tr>
 	    			<td>地址:</td>
 	    			<td colspan="3" >
-	    				<input class="easyui-textbox" value="${customer.address }" type="text" name="address" style="width: 100%" data-options="required:true"/>
+	    				<input class="easyui-textbox" value="${customer.address }" type="text" name="address" style="width: 100%"/>
 	    			</td>
 	    		</tr>
 	    		<tr>
 	    			<td>联系电话:</td>
 	    			<td colspan="3">
-	    				<input class="easyui-textbox" value="${customer.telephone }" type="text" name="telephone" style="width: 100%" data-options="required:true"/>
+	    				<input class="easyui-textbox" value="${customer.telephone }" type="text" name="telephone" style="width: 100%"/>
 	    			</td>
 	    		</tr>
 	    	</table>

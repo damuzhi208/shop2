@@ -30,6 +30,7 @@ import com.company.hxs.order.service.TSysOrderLineService;
 import com.company.hxs.order.service.TSysOrderOtherService;
 import com.company.hxs.order.service.TSysOrderQiaojiaService;
 import com.company.hxs.order.service.TSysOrderRecordService;
+import com.company.hxs.order.vo.TSysRecordVo;
 
 @Controller
 @RequestMapping("order")
@@ -83,6 +84,23 @@ public class TSysOrderRecordController extends BaseController {
 	public String listData(HttpServletRequest request, TSysOrderRecord order, Integer page, Integer rows){
 		Page<TSysOrderRecord> list = tSysOrderRecordService.getPageResult(order, page, rows);
 		return BaseService.List2Json4FullDate(list.getRows(), list.getFooter(), list.getTotal());
+	}
+	
+	@RequestMapping("viewRecord")
+	public String viewRecord(HttpServletRequest request, Integer customerId){
+		request.setAttribute("customerId", customerId);
+		return "order/viewRecord";
+	}
+	
+	/**
+	 * ¹Ë¿Í¹ºÂò¼ÇÂ¼
+	 * @return
+	 */
+	@RequestMapping("recordData")
+	@ResponseBody
+	public String recordData(TSysRecordVo vo, Integer page, Integer rows){
+		Page<TSysRecordVo> result = tSysOrderRecordService.getPageResult(vo, page, rows);
+		return BaseService.List2Json(result.getRows(), result.getTotal(), result.getFooter());
 	}
 	
 	/**

@@ -16,6 +16,7 @@ import com.company.hxs.order.dao.TSysOrderRecordDao;
 import com.company.hxs.order.entity.TSysOrderLine;
 import com.company.hxs.order.entity.TSysOrderQiaojia;
 import com.company.hxs.order.entity.TSysOrderRecord;
+import com.company.hxs.order.vo.TSysRecordVo;
 
 @Service
 public class TSysOrderRecordService extends BaseService {
@@ -156,6 +157,32 @@ public class TSysOrderRecordService extends BaseService {
 		if(record != null){
 			tSysOrderRecordDao.delete(record);
 		}
+	}
+
+	public Page<TSysRecordVo> getPageResult(TSysRecordVo vo, Integer page, Integer rows) {
+		StringBuffer sql = new StringBuffer("select * from v_shop_order v where 1 = 1 ");
+		List<Object> params = new ArrayList<Object>();
+		if(vo != null){
+			if(vo.getOrderDate() != null){
+				sql.append(" and v.orderDate >= ?");
+				params.add(vo.getOrderDate());
+			}
+			if(vo.getEndDate() != null){
+				sql.append(" and v.orderDate <= ?");
+				params.add(vo.getEndDate());
+			}
+			if(CTools.isNotEmpty(vo.getShopName())){
+				sql.append(" and v.shopName like ?");
+				params.add("%" + vo.getShopName() + "%");
+			}
+		}
+		sql.append(" order by v.orderDate desc");
+		List<TSysRecordVo> list = sqlCommonDao.findListBySqlAsAliasToBean2(sql.toString(), TSysRecordVo.class, params.toArray(), page, rows);
+		Integer total = sqlCommonDao.sqlGetCount("select count(1) from ("+sql.toString()+")o ", params.toArray());
+		//合计
+		String sSql = "select '合计' shopName,sum(o.liushui) liushui,sum(o.profit) profit from (" + sql.toString() + ")o";
+		List<TSysRecordVo> footer = sqlCommonDao.findListBySqlAsAliasToBean2(sSql, TSysRecordVo.class, params.toArray());
+		return Page.create(list, footer, total);
 	}
 
 }
