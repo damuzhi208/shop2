@@ -31,7 +31,7 @@ public class TSysOrderRecordService extends BaseService {
 	 * @return
 	 */
 	public Page<TSysOrderRecord> getPageResult(TSysOrderRecord order, Integer page, Integer rows) {
-		StringBuffer sql = new StringBuffer("select t.orderId, b.`name` customerName, b.companyName, t.orderDate,b.telephone, t.opTime,getLiushuiByOrderId(t.orderId) liushui,getProfitByOrderId(t.orderId) profit ");
+		StringBuffer sql = new StringBuffer("select t.orderId, b.id customerId,b.`name` customerName, b.companyName, t.orderDate,b.telephone, t.opTime,getLiushuiByOrderId(t.orderId) liushui,getProfitByOrderId(t.orderId) profit ");
 			sql.append(" from t_sys_order_record t ,t_base_customer b where t.customerId = b.id");
 		List<Object> params = new ArrayList<Object>();
 		if(order != null){
@@ -52,6 +52,7 @@ public class TSysOrderRecordService extends BaseService {
 				params.add("%" + order.getTelephone() + "%");
 			}
 		}
+		sql.append(" order by t.orderDate desc,b.name");
 		List<TSysOrderRecord> list = sqlCommonDao.findListBySqlAsAliasToBean2(sql.toString(), TSysOrderRecord.class, params.toArray(), page, rows);
 		Integer total = tSysOrderRecordDao.sqlGetCount("select count(1) from (" + sql.toString() + ")o", params.toArray());
 		
@@ -174,6 +175,10 @@ public class TSysOrderRecordService extends BaseService {
 			if(CTools.isNotEmpty(vo.getShopName())){
 				sql.append(" and v.shopName like ?");
 				params.add("%" + vo.getShopName() + "%");
+			}
+			if(CTools.isNotEmpty(vo.getCustomerId())){
+				sql.append(" and v.customerId = ?");
+				params.add(vo.getCustomerId());
 			}
 		}
 		sql.append(" order by v.orderDate desc");

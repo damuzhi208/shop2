@@ -15,6 +15,7 @@
 <body>
 	<div class="easyui-layout" fit="true" style="border:none;">
 		<div id="toolbar" style="height: 44px;padding:7px 2px">
+			<input type="hidden" name="customerId" value="${customerId }"/>
 			名称：<input  class="easyui-textbox" id="shopName" type="text" name="shopName" />
 			订单开始日期：<input  class="easyui-datebox" id="orderDate" type="text" name="orderDate" />
 			结束日期：<input  class="easyui-datebox" id="endDate" type="text" name="endDate" />

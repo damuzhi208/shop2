@@ -37,7 +37,10 @@ public class TSysOrderOtherService extends BaseService{
 				params.add(0);
 			}
 		}
+		String sSql = "select 'ºÏ¼Æ' guige,sum(o.liushui) liushui,sum(o.profit) profit from (" + sql.toString() + ") o";
+		List<TSysOrderOther> footer = sqlCommonDao.findListBySqlAsAliasToBean2(sSql, TSysOrderOther.class, params.toArray());
 		Page<TSysOrderOther> result = sqlCommonDao.sqlFindPage(sql.toString(), TSysOrderOther.class, params.toArray(), page, rows);
+		result.setFooter(footer);
 		return result;
 	}
 

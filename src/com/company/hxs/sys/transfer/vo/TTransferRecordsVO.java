@@ -48,6 +48,11 @@ public class TTransferRecordsVO {
 	private BigDecimal profit;
 	
 	/**
+	 * 流水额
+	 */
+	private BigDecimal liushui;
+	
+	/**
 	 * 调动类型，1调进2调出
 	 */
 	private Integer transType;
@@ -200,6 +205,14 @@ public class TTransferRecordsVO {
 
 	public void setUnitStr(String unitStr) {
 		this.unitStr = unitStr;
+	}
+
+	public BigDecimal getLiushui() {
+		return liushui;
+	}
+
+	public void setLiushui(BigDecimal liushui) {
+		this.liushui = liushui;
 	}
 	
 }

@@ -54,6 +54,10 @@ public class Page<T> {
 		return this.footer;
 	}
 	
+	public void setFooter(List<T> footer) {
+		this.footer = footer;
+	}
+
 	public Integer getPage(){
 		return this.page;
 	}

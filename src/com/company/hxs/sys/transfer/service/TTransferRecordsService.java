@@ -30,7 +30,7 @@ public class TTransferRecordsService extends BaseService{
 	 * @return
 	 */
 	public Page<TTransferRecordsVO> getPageResult(TTransferRecordsVO vo, Integer page, Integer rows) {
-		StringBuffer sql = new StringBuffer("select r.id,r.shopName,r.nums,r.unit,r.cost,r.salePrice,r.transType,r.transDate,r.createTime,r.profit,c.`name` customerName,c.companyName,c.telephone,b.name unitStr ");
+		StringBuffer sql = new StringBuffer("select r.id,r.shopName,r.nums,r.unit,r.cost,r.salePrice,r.transType,r.transDate,r.createTime,(r.salePrice*r.nums) liushui,r.profit,c.`name` customerName,c.companyName,c.telephone,b.name unitStr ");
 			sql.append(" from t_transfer_records r,t_base_customer c,t_base_unit b where r.customerId = c.id and b.id = r.unit ");
 		List<Object> params = new ArrayList<Object>();
 		if(vo != null){
@@ -47,9 +47,10 @@ public class TTransferRecordsService extends BaseService{
 				params.add("%" + vo.getTelephone() + "%");
 			}
 		}
+		sql.append("order by r.transDate desc,c.name");
 		List<TTransferRecordsVO> voList = sqlCommonDao.findListBySqlAsAliasToBean2(sql.toString(), TTransferRecordsVO.class, params.toArray(), page, rows);
 		
-		String sumSql = "select '合计' shopName,sum(o.nums) nums,sum(o.profit) profit from (" + sql.toString() + ") o where 1 = 1";
+		String sumSql = "select '合计' shopName,sum(o.nums) nums,sum(o.liushui) liushui,sum(o.profit) profit from (" + sql.toString() + ") o where 1 = 1";
 		List<TTransferRecordsVO> footer = sqlCommonDao.findListBySqlAsAliasToBean2(sumSql, TTransferRecordsVO.class, params.toArray());
 		Integer total = tTransferRecordsDao.sqlGetCount("select count(1) from ("+sql.toString()+") o", params.toArray());
 		return Page.create(voList, footer, total);
