@@ -36,7 +36,8 @@ public class TSysOrderRecordService extends BaseService {
 		List<Object> params = new ArrayList<Object>();
 		if(order != null){
 			if(CTools.isNotEmpty(order.getCustomerName())){
-				sql.append(" and b.name like ?");
+				sql.append(" and (b.name like ? or b.companyName like ?)");
+				params.add("%" + order.getCustomerName() + "%");
 				params.add("%" + order.getCustomerName() + "%");
 			}
 			if(order.getBeginDate() != null){
