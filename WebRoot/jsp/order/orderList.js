@@ -46,7 +46,8 @@ function delBtnClick(id){
 }
 
 function viewRecord(customerId){
-	var url = "order/viewRecord?customerId="+customerId;
+	var flag = $("#flag").val();
+	var url = "order/viewRecord?customerId="+customerId+"&flag="+flag;
 	modelDialog = sy.iframeDialog({
 		"href" : url,
 		"height" : '85%',

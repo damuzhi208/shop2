@@ -17,20 +17,24 @@ public class TSysMenuService extends BaseService{
 	@Resource private TSysMenuDao tSysMenuDao; 
 	
 	public List<TSysMenuVO> getMenuList(TSysUser user) {
-		String pSql = "select t.menuId menuid,t.menuName menuname,t.icon,t.url from t_sys_menu t where t.parentId is null order by t.order";
-		List<TSysMenuVO> parentList = sqlCommonDao.findListBySqlAsAliasToBean2(pSql, TSysMenuVO.class);
+		StringBuffer pSql = new StringBuffer("select t.menuId menuid,t.menuName menuname,t.icon,t.url from t_sys_menu t where t.parentId is null ");
+			pSql.append("and EXISTS (select 1 from t_sys_role_menu rm, t_sys_role r,t_sys_role_ref ref where rm.roleId = r.id and ref.roleId = r.id and find_in_set(t.menuId,rm.menuId) and ref.userId = ?)");
+			pSql.append("  order by t.orders");
+		List<TSysMenuVO> parentList = sqlCommonDao.findListBySqlAsAliasToBean2(pSql.toString(), TSysMenuVO.class,new Object[]{user.getId()});
 		for(TSysMenuVO vo : parentList){
-			getChildrenMenu(vo);
+			getChildrenMenu(vo, user.getId());
 		}
 		return parentList;
 	}
 
-	private void getChildrenMenu(TSysMenuVO vo) {
-		String cSql = "select t.menuId menuid,t.menuName menuname,t.icon,t.url from t_sys_menu t where t.parentId = ? order by t.order";
-		List<TSysMenuVO> childrenList = sqlCommonDao.findListBySqlAsAliasToBean2(cSql, TSysMenuVO.class, new Object[]{vo.getMenuid()});
+	private void getChildrenMenu(TSysMenuVO vo, Integer userId) {
+		StringBuffer cSql = new StringBuffer("select t.menuId menuid,t.menuName menuname,t.icon,t.url from t_sys_menu t where t.parentId = ? ");
+			cSql.append(" and EXISTS (select 1 from t_sys_role_menu rm, t_sys_role r,t_sys_role_ref ref where rm.roleId = r.id and ref.roleId = r.id and find_in_set(t.menuId,rm.menuId) and ref.userId = ?)");
+			cSql.append(" order by t.orders");
+		List<TSysMenuVO> childrenList = sqlCommonDao.findListBySqlAsAliasToBean2(cSql.toString(), TSysMenuVO.class, new Object[]{vo.getMenuid(), userId});
 		vo.setMenus(childrenList);
 		for(TSysMenuVO co : childrenList){
-			getChildrenMenu(co);
+			getChildrenMenu(co, userId);
 		}
 	}
 

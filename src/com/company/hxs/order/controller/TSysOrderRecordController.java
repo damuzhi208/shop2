@@ -49,7 +49,8 @@ public class TSysOrderRecordController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("list")
-	public String list(){
+	public String list(HttpServletRequest request, boolean flag){
+		request.setAttribute("flag", flag);
 		return "order/orderList";
 	}
 	
@@ -87,8 +88,9 @@ public class TSysOrderRecordController extends BaseController {
 	}
 	
 	@RequestMapping("viewRecord")
-	public String viewRecord(HttpServletRequest request, Integer customerId){
+	public String viewRecord(HttpServletRequest request, Integer customerId, boolean flag){
 		request.setAttribute("customerId", customerId);
+		request.setAttribute("flag", flag);
 		return "order/viewRecord";
 	}
 	

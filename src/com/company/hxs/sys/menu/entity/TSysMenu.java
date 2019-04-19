@@ -25,7 +25,7 @@ public class TSysMenu {
 
 	private String url;//菜单路径
 
-	private Integer order;//排序号
+	private Integer orders;//排序号
 
 	private Integer status;//状态
 
@@ -63,12 +63,12 @@ public class TSysMenu {
 		this.url = url;
 	}
 
-	public Integer getOrder() {
-		return order;
+	public Integer getOrders() {
+		return orders;
 	}
 
-	public void setOrder(Integer order) {
-		this.order = order;
+	public void setOrders(Integer orders) {
+		this.orders = orders;
 	}
 
 	public Integer getStatus() {

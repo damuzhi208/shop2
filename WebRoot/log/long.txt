@@ -4,4 +4,52 @@ alter table t_base_customer modify id integer auto_increment ;
 ALTER TABLE t_base_customer AUTO_INCREMENT = 1;
 
 
+2019-04-18
+CREATE TABLE `t_sys_role` (
+`id`  int NOT NULL AUTO_INCREMENT COMMENT '主键id' ,
+`roleName`  varchar(100) NULL COMMENT '角色名称' ,
+`state`  int NULL COMMENT '状态' ,
+PRIMARY KEY (`id`)
+)
+;
+
+ALTER TABLE `t_sys_role`
+MODIFY COLUMN `state`  int(11) NULL DEFAULT 1 COMMENT '状态' AFTER `roleName`;
+
+
+
+CREATE TABLE `t_sys_role_ref` (
+`id`  int NOT NULL AUTO_INCREMENT COMMENT '主键' ,
+`roleId`  int NULL COMMENT '角色id' ,
+`userId`  int NULL COMMENT '人员id' ,
+PRIMARY KEY (`id`)
+)
+;
+
+
+
+INSERT INTO `shop`.`t_sys_menu` (`menuId`, `icon`, `menuName`, `url`, `parentId`, `order`, `status`) VALUES ('26', 'icon-nav', '系统管理', '', NULL, '0', '1');
+INSERT INTO `shop`.`t_sys_menu` (`menuId`, `icon`, `menuName`, `url`, `parentId`, `order`, `status`) VALUES ('27', 'icon-nav', '角色管理', 'role/list', '26', '0', '1');
+-- INSERT INTO `shop`.`t_sys_menu` (`menuId`, `icon`, `menuName`, `url`, `parentId`, `order`, `status`) VALUES ('28', 'icon-nav', '权限管理', 'role/manage', '26', '0', '1');
+INSERT INTO `shop`.`t_sys_menu` (`menuId`, `icon`, `menuName`, `url`, `parentId`, `order`, `status`) VALUES ('29', 'icon-nav', '交易记录1', 'order/list?flag=false', '13', '0', '1');
+UPDATE `shop`.`t_sys_menu` SET `menuId`='14', `icon`='icon-nav', `menuName`='交易记录', `url`='order/list?flag=true', `parentId`='13', `orders`='0', `status`='1' WHERE (`menuId`='14');
+
+
+CREATE TABLE `t_sys_role_menu` (
+`id`  int NOT NULL AUTO_INCREMENT ,
+`roleId`  int NULL COMMENT '角色id' ,
+`menuId`  varchar(300) NULL COMMENT '菜单ids' ,
+PRIMARY KEY (`id`)
+)
+;
+
+
+ALTER TABLE `t_sys_menu`
+CHANGE COLUMN `order` `orders`  int(11) NULL DEFAULT 0 COMMENT '排序' AFTER `parentId`;
+
+UPDATE `shop`.`t_sys_user` SET `id`='3', `account`='laoban', `userName`='李伟', `passWord`='123456', `state`='1' WHERE (`id`='3');
+INSERT INTO `shop`.`t_sys_user` (`id`, `account`, `userName`, `passWord`, `state`) VALUES ('4', 'lujia', '鲁佳', '123456', '1');
+
+t_sys_menu  -->  order --> orders
+
 

@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -19,6 +20,7 @@
 			电话号码：<input type="text" name="telephone" />
 			订单开始日期：<input  class="easyui-datebox" id="beginDate" type="text" name="beginDate" />
 			结束日期：<input  class="easyui-datebox" id="endDate" type="text" name="endDate" />
+			<input type="hidden" name="flag" id="flag" value="${flag }">
 			<span class="easyui-searchbtn" onclick="doSearch();">搜索</span>
 			<span class="easyui-addbtn" onclick="addBtnClick();">新增</span>
 		</div>
@@ -45,7 +47,9 @@
 		    		<tr>
 		    			<th data-options="field:'telephone',align:'center',width:120">电话号码</th>
 		    			<th data-options="field:'liushui',align:'center',width:160,formatter:easyuiMoneyFormatter">流水额</th>
-		    			<th data-options="field:'profit',align:'center',width:160,formatter:easyuiMoneyFormatter">订单利润</th>
+		    			<c:if test="${flag }">
+			    			<th data-options="field:'profit',align:'center',width:160,formatter:easyuiMoneyFormatter">订单利润</th>
+		    			</c:if>
 		    			<th data-options="field:'orderDate',align:'center',width:160,formatter:orderDateFormatter">订单时间</th>
 		    			<th data-options="field:'opTime',align:'center',width:160">操作时间</th>
 		    			<th data-options="field:'2',align:'center',width:260,formatter:opFormatter">操作</th>

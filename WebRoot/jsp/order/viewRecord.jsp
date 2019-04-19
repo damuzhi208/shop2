@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -39,10 +40,14 @@
 		    			<th data-options="field:'1',align:'center',width:100,formatter:shopNameFormatter">类别</th>
 		    			<th data-options="field:'shopName',align:'left',width:360">名称</th>
 		    			<th data-options="field:'orderNums',align:'center',width:100,formatter:easyuiMoneyFormatter">数量</th>
-		    			<th data-options="field:'costPrice',align:'center',width:100,formatter:easyuiMoneyFormatter">成本单价</th>
-		    			<th data-options="field:'salePrice',align:'center',width:100,formatter:easyuiMoneyFormatter">成本单价</th>
+		    			<c:if test="${flag }">
+			    			<th data-options="field:'costPrice',align:'center',width:100,formatter:easyuiMoneyFormatter">成本单价</th>
+		    			</c:if>
+		    			<th data-options="field:'salePrice',align:'center',width:100,formatter:easyuiMoneyFormatter">交易价格</th>
 		    			<th data-options="field:'liushui',align:'center',width:100,formatter:easyuiMoneyFormatter">流水</th>
-		    			<th data-options="field:'profit',align:'center',width:100,formatter:easyuiMoneyFormatter">利润</th>
+		    			<c:if test="${flag }">
+			    			<th data-options="field:'profit',align:'center',width:100,formatter:easyuiMoneyFormatter">利润</th>
+		    			</c:if>
 		    			<th data-options="field:'orderDate',align:'center',width:100">订单时间</th>
 		    		</tr>
 		    	</thead>
